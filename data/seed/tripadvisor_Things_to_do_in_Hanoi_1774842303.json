@@ -1,0 +1,601 @@
+{
+  "search_metadata": {
+    "id": "69c9f039d355ccfdc501326a",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/RC53KlhBU_6dFdRZ9Jty_Q/69c9f039d355ccfdc501326a.json",
+    "created_at": "2026-03-30 03:38:33 UTC",
+    "processed_at": "2026-03-30 03:38:33 UTC",
+    "tripadvisor_url": "https://www.tripadvisor.com/Search?q=Things+to+do+in+Hanoi&ssrc=A&geo=1&offset=0&limit=30",
+    "raw_html_file": "https://serpapi.com/searches/RC53KlhBU_6dFdRZ9Jty_Q/69c9f039d355ccfdc501326a.html",
+    "prettify_html_file": "https://serpapi.com/searches/RC53KlhBU_6dFdRZ9Jty_Q/69c9f039d355ccfdc501326a.prettify",
+    "total_time_taken": 1.65
+  },
+  "search_parameters": {
+    "engine": "tripadvisor",
+    "q": "Things to do in Hanoi",
+    "tripadvisor_domain": "www.tripadvisor.com",
+    "ssrc": "A",
+    "offset": 0,
+    "limit": 30
+  },
+  "places": [
+    {
+      "position": 1,
+      "title": "Ninh Binh Full-Day Tour from Hanoi to Hoa Lu, Tam Coc & Mua Cave Via Boat & Bike",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "17349919",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d17349919-Ninh_Binh_Full_Day_Tour_from_Hanoi_to_Hoa_Lu_Tam_Coc_Mua_Cave_Via_Boat_Bike-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=17349919&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Escape the bustling confines of Hanoi city, and breath the fresh air on this full-day rural Vietnam tour. With a local lunch of goat meat, fried rice and local fruits onboard, you’ll be fueled for an afternoon of action, taking in the scenery by both bamboo boat and mountain bike. See local villagers going about their daily lives as you come to appreciate a quieter slice of Vietnamese culture.",
+      "rating": 4.9,
+      "reviews": 3859,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/47/10/caption.jpg",
+      "highlighted_review": {
+        "text": "to do in Hanoi, however we were glad we went.",
+        "highlighted_texts": [
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 2,
+      "title": "Hanoi Jeep Tour: Food, Culture and Fun by Vietnam Army Jeep",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15040389",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d15040389-Hanoi_Jeep_Tour_Food_Culture_and_Fun_by_Vietnam_Army_Jeep-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15040389&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Experience the sights, sounds, and smells of Hanoi in a unique way as you explore the city in a Soviet-era GAZ-69 jeep. See a mix of city highlights and hidden gems in the capital of Vietnam and learn about the country’s history from your guide. Choose from morning, afternoon, or evening tours and enjoy a delicious street food meal.",
+      "rating": 5,
+      "reviews": 15497,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/a2/e1/aa/caption.jpg",
+      "highlighted_review": {
+        "text": "Definitely a thing to do in Hanoï!!!",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "Hanoï"
+        ],
+        "mention_count": 54
+      }
+    },
+    {
+      "position": 3,
+      "title": "Hanoi Motorbike Tour: Food, Culture and Fun by Vintage Motorbike",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15040387",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d15040387-Hanoi_Motorbike_Tour_Food_Culture_and_Fun_by_Vintage_Motorbike-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15040387&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Discover the cuisine of northern Vietnam on a food tour of Hanoi. Hop on the back of a vintage motorbike and zoom through the streets of the city in search of delicious dishes. Choose from a morning, afternoon, or evening departure and enjoy tastings of delectable street foods as well as a complimentary drink over the course of a few hours.",
+      "rating": 5,
+      "reviews": 6572,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/1d/46/ec/caption.jpg",
+      "highlighted_review": {
+        "text": "This is arguably the best thing to do in Hanoi if you want to truly get",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 58
+      }
+    },
+    {
+      "position": 4,
+      "title": "Small Group Hanoi Street Food Tour with a Real Foodie",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "12878612",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d12878612-Small_Group_Hanoi_Street_Food_Tour_with_a_Real_Foodie-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=12878612&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Navigating Hanoi’s busy streets on your own can be challenging, but on this food walking tour, you just need to follow your guide to tasty spots. Although the itinerary may change, possible tastings on include rice noodle soup with beef, snails, steamed pancakes, Vietnamese sandwiches and various kinds of donuts. You’ll also enjoy lunch or dinner at a restaurant, depending on the departure time you choose.",
+      "rating": 5,
+      "reviews": 4350,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/ba/24/caption.jpg",
+      "highlighted_review": {
+        "text": "to do in Hanoi.",
+        "highlighted_texts": [
+          "do",
+          "Hanoi."
+        ],
+        "mention_count": 39
+      }
+    },
+    {
+      "position": 5,
+      "title": "Full-Day Ninh Binh Highlights Tour from Hanoi",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "17305820",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d17305820-Full_Day_Ninh_Binh_Highlights_Tour_from_Hanoi-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=17305820&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Skip the hassle of piecing together boats and bike rentals and savor Ninh Binh’s highlights on this guided small-group tour. Visit Hoa Lu, once Vietnam's capital, explore Mua Cave and mountain views, ride a boat through Tam Coc caves, and cycle to Bich Dong Pagoda. Enjoy an authentic Vietnamese lunch and hotel pickup and drop-off by limousine minivan.",
+      "rating": 5,
+      "reviews": 7758,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/c8/d8/caption.jpg",
+      "highlighted_review": {
+        "text": "If you have to choose one \"touristy\" thing to do with your time in Hanoi",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 16
+      }
+    },
+    {
+      "position": 6,
+      "title": "Hanoi Backstreet Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "11851500",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g293924-d11851500-Reviews-Hanoi_Backstreet_Tours-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11851500&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Hanoi Backstreet Tours is the ORIGINAL BACKSTREET TOUR company. We organize daily AFFORDABLE & REASONABLE vintage Jeep, Vintage Motorbike, Vespa & Sidecar tours. We offer authentic experiences of Food, Culture, Sightseeing, and Fun in and around Hanoi, Ninh Binh, Hoi An, Ha Giang, Da Nang, and Ho Chi Minh City. We provide unique and impactful food, culture, and fun experiences for those who want to learn about and discover the real Vietnam, live a day in the life of Vietnamese, and enjoy authentic local foods and cultural connections.",
+      "rating": 5,
+      "reviews": 29404,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/8f/d9/39/hanoi-backstreet-tours.jpg",
+      "highlighted_review": {
+        "mention_count": 59
+      }
+    },
+    {
+      "position": 7,
+      "title": "5 Traditional Dishes Hanoi Cooking Class with Market Trip",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15098020",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d15098020-5_Traditional_Dishes_Hanoi_Cooking_Class_with_Market_Trip-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15098020&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Learn to cook like a local during this lesson in Hanoi. After meeting up with an informative instructor in the historic Old Quarter, head to the city’s largest market and learn about the basics of Vietnamese cooking. Pick the best produce and spices, then cook several authentic dishes. Afterward, enjoy your creations while sipping complimentary rice wine.",
+      "rating": 5,
+      "reviews": 4946,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/ad/9c/caption.jpg",
+      "highlighted_review": {
+        "text": "What a great thing to do in Hanoi!",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 13
+      }
+    },
+    {
+      "position": 8,
+      "title": "Hanoi Motorbike Tours Led By Women: Hanoi By Night Foodie Motorbike Tours",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "14086913",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d14086913-Hanoi_Motorbike_Tours_Led_By_Women_Hanoi_By_Night_Foodie_Motorbike_Tours-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=14086913&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Taste your way through Vietnam’s capital city on this nighttime excursion. After a convenient hotel pickup, hop on a motorbike with a female guide and savor complimentary dishes like *banh cuon* (steamed roll cake), *bun cha* (grilled pork with vermicelli noodles), and *banh ran ngot* (salty and sweet donuts). Get an insider’s view of Hanoi’s food scene while exploring sites such as the Old Quarter, Ngu Xa and village.",
+      "rating": 5,
+      "reviews": 1511,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/86/c6/caption.jpg",
+      "highlighted_review": {
+        "text": "Fantastic tour - it is the #1 thing to do in Hanoi.",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "Hanoi."
+        ],
+        "mention_count": 19
+      }
+    },
+    {
+      "position": 9,
+      "title": "[HOT] Hanoi Old Quarter Walking Street Food - Small Group Tour",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11456738",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d11456738-HOT_Hanoi_Old_Quarter_Walking_Street_Food_Small_Group_Tour-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11456738&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Explore Hanoi’s Old Quarter on foot with a foodie guide who introduces you to local cuisine and helps you overcome the language barrier. This street food tour takes you off the beaten path to food stalls and local eateries in Vietnam's capital city. Sample authentic dishes and learn about Vietnamese cuisine as you discover the traditional guilds of ‘36 Old Streets.’ Plus, you can upgrade to add an egg coffee class, visit to the famous Train Street to your itinerary, or make your dishes extra spicy.",
+      "rating": 5,
+      "reviews": 2144,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/a3/72/51/caption.jpg",
+      "highlighted_review": {
+        "text": "She even gave us a list to other things to do in Hanoi after the tour came",
+        "highlighted_texts": [
+          "things",
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 8
+      }
+    },
+    {
+      "position": 10,
+      "title": "Hanoi Backstreet Jeep Tour : Hanoi HIGHTLIGHTS and HIDDEN GEMS",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15305763",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d15305763-Hanoi_Backstreet_Jeep_Tour_Hanoi_HIGHTLIGHTS_and_HIDDEN_GEMS-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15305763&tripadvisor_domain=www.tripadvisor.com",
+      "description": "This half-day Hanoi Jeep tour offers a unique way to see city highlights and hidden gems. Ride in a Vietnam Army Jeep through the city's backstreets and markets, stopping at landmarks and a local café for traditional egg coffee. Hotel pickup and drop-off in Hanoi Old Quarter are included for convenience.",
+      "rating": 5,
+      "reviews": 1845,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/a4/a8/caption.jpg",
+      "highlighted_review": {
+        "mention_count": 17
+      }
+    },
+    {
+      "position": 11,
+      "title": "Hanoi half-day with Food + Culture + Fun By Minsk Motorcycle",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "19406262",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d19406262-Hanoi_half_day_with_Food_Culture_Fun_By_Minsk_Motorcycle-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=19406262&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Hanoi is known as the “capital of the motorbike kingdom” with over 5 million bikes on the streets every day. The goal of this tour is to immerse you in a true living museum of Hanoi life. Our professional guides will provide you with a WOW experience in just a few hours on our customized USSR VINTAGE MINSK motorbike. Take you off the beaten path through Hanoi’s backstreets and to famous sites, all while sampling special local dishes. ",
+      "rating": 5,
+      "reviews": 1500,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/a7/24/18/caption.jpg",
+      "highlighted_review": {
+        "text": "The most recommended tour in Hanoi. Must to do thing",
+        "highlighted_texts": [
+          "Hanoi.",
+          "do",
+          "thing"
+        ],
+        "mention_count": 16
+      }
+    },
+    {
+      "position": 12,
+      "title": "Private Hanoi Street Food Walking Tour With Real Foodie",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "13182031",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d13182031-Private_Hanoi_Street_Food_Walking_Tour_With_Real_Foodie-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=13182031&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Any visitor to Hanoi is faced with a multitude of choices when it comes to Vietnamese cuisine. This half-day private walking tour with a foodie as your guide takes away the guesswork. Let an insider lead the way to some of the best food stands and eateries in Hanoi’s Old Quarter. You’ll observe local life while filling up on flavors that make Hanoi a culinary destination.",
+      "rating": 5,
+      "reviews": 1093,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/cb/08/caption.jpg",
+      "highlighted_review": {
+        "mention_count": 19
+      }
+    },
+    {
+      "position": 13,
+      "title": "Hanoi Coffee Workshop: Taste Salt, Coconut and Egg Coffee",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "27708444",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d27708444-Hanoi_Coffee_Workshop_Taste_Salt_Coconut_and_Egg_Coffee-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=27708444&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Delve into Hanoi's vibrant coffee scene with an immersive coffee workshop. Learn about Vietnam's rich coffee history and unique brewing techniques. Discover how to brew authentic Vietnamese coffee from professionals and learn how to discern between a perfectly brewed cup and an ordinary one.",
+      "rating": 5,
+      "reviews": 1307,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/25/b7/0d/caption.jpg",
+      "highlighted_review": {
+        "text": "It’s a must visit and things to do in Hanoi!",
+        "highlighted_texts": [
+          "things",
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 4
+      }
+    },
+    {
+      "position": 14,
+      "title": "Hanoi Half-day with Food + Fun + Culture By Russian Jeep",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "19406261",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d19406261-Hanoi_Half_day_with_Food_Fun_Culture_By_Russian_Jeep-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=19406261&tripadvisor_domain=www.tripadvisor.com",
+      "description": "The Soviet Union’s answer to the US military Jeep, the GAZ-69 4WD was a staple of the winning side during the Vietnam War. Experience Hanoi in wartime style on this food tour with a difference. You’ll see famous sights and local life and how the two combine; you’ll sample enough dishes to make an entire breakfast, lunch, or dinner; hotel pickup from the Old Quarter adds convenience.",
+      "rating": 5,
+      "reviews": 1281,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/5c/7a/d4/caption.jpg",
+      "highlighted_review": {
+        "text": "The number one thing to do in Hanoi!",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 8
+      }
+    },
+    {
+      "position": 15,
+      "title": "Ha Food Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "12492674",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g293924-d12492674-Reviews-Ha_Food_Tours-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=12492674&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Ha Food Tours is a company provides and operated tourism products relate with cuisine and culture in Hanoi Old Quarter such as: walking street food tour, cooking class, market visiting e.g.",
+      "rating": 5,
+      "reviews": 7034,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/62/db/ca/getlstd-property-photo.jpg",
+      "highlighted_review": {
+        "mention_count": 12
+      }
+    },
+    {
+      "position": 16,
+      "title": "Hanoi e.Buddies",
+      "place_type": "ATTRACTION",
+      "place_id": "8046429",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g23068219-d8046429-Reviews-Hanoi_e_Buddies-Ba_Dinh_Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=8046429&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Hanoi e.Buddies (Hebs) is a volunteer student tour guide organization in Hanoi dedicated to spreading the genuine beauty and culture of our 1000-year-old capital city of Vietnam to beloved international friends. “Energetic”, “Enthusiastic” and “Eager to learn” - these are what identify us. Traveling is all about connecting people together and that is exactly the mision we want to completed after every FREE tour of us. Happy moments and memorable journeys are just a click away from now! ➡️➡️➡️ Visit our website https://hanoiebuddies.vn/ to have a look at our city and go around with us in your personal tours! ✨",
+      "rating": 4.9,
+      "reviews": 984,
+      "location": "Ba Dinh, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/b9/4a/e0/caption.jpg",
+      "highlighted_review": {
+        "mention_count": 15
+      }
+    },
+    {
+      "position": 17,
+      "title": "Ha Noi Walking Food Tour, Non Vegetarian,Vegan, vegetarian Option",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "20188941",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d20188941-Ha_Noi_Walking_Food_Tour_Non_Vegetarian_Vegan_vegetarian_Option-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=20188941&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Explore Hanoi’s street food scene with a local guide on this private walking tour. Sample authentic street food dishes and drinks as you learn about Vietnamese cuisine and culture. Visit seven to 10 food locations, enjoy tastings, and learn traditional ways to eat each dish. Hotel pickup is included for added convenience.",
+      "rating": 5,
+      "reviews": 845,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/14/2b/42/caption.jpg",
+      "highlighted_review": {
+        "text": "do in Hanoi .",
+        "highlighted_texts": [
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 15
+      }
+    },
+    {
+      "position": 18,
+      "title": "Vespa Adventures",
+      "place_type": "ATTRACTION",
+      "place_id": "11853153",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g293924-d11853153-Reviews-Vespa_Adventures-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11853153&tripadvisor_domain=www.tripadvisor.com",
+      "description": "We don’t want to just give you a tour, we want to give you an adventure that you won’t forget. An adventure that shows you the sights tourists don’t usually get to see. So, take the Ride Of Your Life with us to meet the people, see the culture, and taste the authentic flavours of Vietnam.",
+      "rating": 4.9,
+      "reviews": 697,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/5e/9e/99/vespa-adventures-hanoi.jpg",
+      "highlighted_review": {
+        "mention_count": 14
+      }
+    },
+    {
+      "position": 19,
+      "title": "Hanoi street food tour (small group)",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15830908",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d15830908-Hanoi_street_food_tour_small_group-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15830908&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Book this small group tour for an intimate foodie experience, while keeping costs down by sharing your guide. Try several of Hanoi’s top dishes as you walk the city streets. Your guide will take you to spots you couldn’t find on your own, and explain the intricacies of the dishes you taste along the way. The tour is stroller accessible but does not provide infant seats.",
+      "rating": 5,
+      "reviews": 879,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/ac/bc/caption.jpg",
+      "highlighted_review": {
+        "text": "Rik was very knowledgeable and gave us some great tips for things to do",
+        "highlighted_texts": [
+          "things",
+          "do"
+        ],
+        "mention_count": 7
+      }
+    },
+    {
+      "position": 20,
+      "title": "Incense Village, Hat Making & Lacquer Artisan Small Group Hanoi",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "27726067",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d27726067-Incense_Village_Hat_Making_Lacquer_Artisan_Small_Group_Hanoi-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=27726067&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Immerse yourself in a relaxing tour from Hanoi through three villages that are famous for their traditional crafts. Discover the arts of lacquerware, incense, and conical hat making as a driver takes you to the Chuong, Ha Thai and Quang Phu Cau villages. Learn about the local culture and craftspeople at each stop, then try your hand at lacquer painting and crafting a hat.",
+      "rating": 4.9,
+      "reviews": 1505,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/0c/83/b9/caption.jpg",
+      "highlighted_review": {
+        "text": "How you do your thing as a tour guide is truly commendable!",
+        "highlighted_texts": [
+          "do",
+          "thing"
+        ],
+        "mention_count": 1
+      }
+    },
+    {
+      "position": 21,
+      "title": "Vietnam Group Tour",
+      "place_type": "ATTRACTION",
+      "place_id": "2256727",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g293924-d2256727-Reviews-Vietnam_Group_Tour-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=2256727&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Asia Group Tour is a local based provider offering a wide range of tourist services in Vietnam. Our market is from budget travelers who have a chance to join daily typical tour with others, to travelers who want a customized tour, personalized service and a high quality product, to those who want to get something special and have the travel experience they desire. We care about every customer's demand and do our best on every tour to offer customers from all walk of life enjoyable trips with us.",
+      "rating": 4.8,
+      "reviews": 785,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/19/ce/5f/vietnam-group-tour-day.jpg",
+      "highlighted_review": {
+        "mention_count": 7
+      }
+    },
+    {
+      "position": 22,
+      "title": "Hanoi Street Food Tour",
+      "place_type": "ATTRACTION",
+      "place_id": "5583955",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g293924-d5583955-Reviews-Hanoi_Street_Food_Tour-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=5583955&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Hanoi street food tour is a leading local street food travel company located inside old quarter . Our company is not only organizing for street food walking tours ,but also organizing Hanoi city sightseeing, train street & food eating by motorbike, Cyclo tours,biking tours and organizing City sightseeing street food tours on the back of a scooters Located at 78a Đ. Tran Nhat Duat Street, Dong Xuan, Hoan Kiem, Hanoi",
+      "rating": 4.9,
+      "reviews": 10598,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/91/1e/0f/hanoi-street-food-tour.jpg",
+      "highlighted_review": {
+        "mention_count": 190
+      }
+    },
+    {
+      "position": 23,
+      "title": "Hanoi Heritage Premium Daily Tour",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "33280572",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d33280572-Hanoi_Heritage_Premium_Daily_Tour-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=33280572&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Hanoi Capital is always of the top destinations in Vietnam for many foreign travelers. As one of the leading trend operators, Ha Noi Heritage Premium Daily Tours has organized the widest choice of luxury tours including must-see attractions such as Ho Chi Minh Mausoleum; Tran Quoc Pagoda; Vietnam Museum of Ethnology; Temple of Literature... We use luxury limousines transfer service, and own our private Luxury restaurant call \"Mesdames Linh Cuisine\" serving the best local specialties. Moreover, we establish and maintain strong rapport with our customers, prospects, and bussiness partners, providing the top-quality tour at value-for-money prices. Ha Noi Heritage Premium consistently emphasizes satisfying our guests and meeting our customers’expectations.",
+      "rating": 5,
+      "reviews": 1129,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/f3/a7/93/caption.jpg"
+    },
+    {
+      "position": 24,
+      "title": "MF Spa Hanoi",
+      "place_type": "ATTRACTION",
+      "place_id": "10825946",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g293924-d10825946-Reviews-MF_Spa_Hanoi-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=10825946&tripadvisor_domain=www.tripadvisor.com",
+      "description": "In the heart of Hanoi’s Old Quarter, surrounded by history and charm, lies MF Spa Hanoi, a sanctuary of renewal and rejuvenation. Here, the East harmonizes with the West, and ancient philosophies meet contemporary techniques to create an unparalleled healing experience. This haven of tranquility blends advanced global therapies with regional holistic traditions, drawing on nature's local treasures to restore balance and provide an extraordinary opportunity for deep relaxation and recovery. For an unforgettable romantic experience, MF Spa Hanoi boasts a luxurious treatment room designed for couples, where lovebirds can cherish each other's company amidst serenity and peace. MF Spa Hanoi—truly relax.",
+      "rating": 4.9,
+      "reviews": 1134,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/8c/62/3b/couple-treatment-room.jpg",
+      "highlighted_review": {
+        "mention_count": 1
+      }
+    },
+    {
+      "position": 25,
+      "title": "Ninh Binh Day Tour To Visit Hoa Lu - Trang An/Tam Coc - Mua Cave",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "26312864",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d26312864-Ninh_Binh_Day_Tour_To_Visit_Hoa_Lu_Trang_An_Tam_Coc_Mua_Cave-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=26312864&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Ninh Binh is at least a 2-hour drive from Hanoi. Enjoy plenty of personal space on this small-group guided tour by limousine bus, with hotel pickup. Start at Hoa Lu with its ancient royal temples, ride a bike around local villages, and enjoy a buffet lunch featuring Vietnamese specialties. Choose between Trang An or Tam Coc for a scenic boat ride. Finally, climb nearly 500 steps above Mua Cave for breathtaking views of Ngo Dong River.",
+      "rating": 5,
+      "reviews": 1182,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/41/80/caption.jpg",
+      "highlighted_review": {
+        "mention_count": 1
+      }
+    },
+    {
+      "position": 26,
+      "title": "Guided Hanoi Food Tour With Train Street 8 Different Food Tasting",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "28122743",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d28122743-Guided_Hanoi_Food_Tour_With_Train_Street_8_Different_Food_Tasting-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=28122743&tripadvisor_domain=www.tripadvisor.com",
+      "description": "The 3-hour Hanoi Old Quarter Foods & Train Tour offers a blend of delicious street foods, cultural insights, and the unforgettable experience of Train Street, making it a must-do for food enthusiasts and travelers looking to explore the heart of Hanoi’s culinary scene. The Hanoi Street Foods & Train Street tour offers a rich tapestry of culinary delights, cultural immersion, thrilling experiences, and local insights, making it an essential and unforgettable part of any visit to Hanoi.",
+      "rating": 5,
+      "reviews": 596,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/2a/00/d4/caption.jpg",
+      "highlighted_review": {
+        "text": "This was the best thing to do as the first thing in Hanoi.",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "thing",
+          "Hanoi."
+        ],
+        "mention_count": 2
+      }
+    },
+    {
+      "position": 27,
+      "title": "Vietnamese Food Cooking Class in Hanoi with Market Experience",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "19058721",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d19058721-Vietnamese_Food_Cooking_Class_in_Hanoi_with_Market_Experience-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=19058721&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Immerse yourself in Vietnamese cuisine in this small-group cooking class in Hanoi. Start with a visit to the largest market in the city, where you will get to sample local dishes, purchase fresh ingredients and see a glimpse of the daily life of locals. Learn how to make three authentic Vietnamese dishes, which can you savor afterwards with tea and coffee.",
+      "rating": 5,
+      "reviews": 834,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/c0/83/caption.jpg",
+      "highlighted_review": {
+        "mention_count": 2
+      }
+    },
+    {
+      "position": 28,
+      "title": "Hanoi Food Tours",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "27135682",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d27135682-Hanoi_Food_Tours-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=27135682&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Explore Hanoi’s Old Quarter like a local on this walking street food tasting tour with a local guide. Go off the beaten path to food stalls, small restaurants, and markets to sample authentic dishes and learn about Vietnamese cuisine, as you discover the traditional guilds of 36 Streets of the Old Quarter.",
+      "rating": 5,
+      "reviews": 606,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/3c/c6/35/caption.jpg",
+      "highlighted_review": {
+        "mention_count": 1
+      }
+    },
+    {
+      "position": 29,
+      "title": "Hanoi Jeep Adventures",
+      "place_type": "ATTRACTION",
+      "place_id": "14137879",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g293924-d14137879-Reviews-Hanoi_Jeep_Adventures-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=14137879&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Hanoi jeep Adventures Tour gives you a unique way to see Hanoi. Perfect for those who want to get off the beaten path, go to non-tourist areas and see the real Hanoi. We design an itinerary that provides a unique, cultural, fun and once in a life-time adventure. For you to see the real Vietnam and backstreets. see the GOOD, Bad, Fancy, Busy, Noisy, farm countryside,.. The best way for you to learn the peak of the history and culture. At Hanoi Jeep Adventures we offer Hanoi City tour 4m5 hours, night street food tour 4 hours, and red river countryside tour",
+      "rating": 5,
+      "reviews": 1915,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/ae/61/b8/hanoi-jeep-tour-city.jpg",
+      "highlighted_review": {
+        "text": "This is a great thing to do in Hanoi, mainly due the views and our guide",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "Hanoi"
+        ],
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 30,
+      "title": "Ninh Binh Day Trip: Hoa Lu-Trang An/Tam Coc-Mua Cave-Cycling-Boat",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "24087673",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g293924-d24087673-Ninh_Binh_Day_Trip_Hoa_Lu_Trang_An_Tam_Coc_Mua_Cave_Cycling_Boat-Hanoi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=24087673&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Visit the Dinh King temple in the Hoa Lu ancient capital by bicycle - Visit Mua Cave by hiking 500 steps to Lying Dragon Mountain to enjoy stunning view - Have the Vietnamese buffet lunch at the local restaurant - The most satisfying boat tour in Ninh Binh with a combination of visiting picturesque Trang An Grottoes.  >>  >> Comfortable Shuttle bus transfer >> Enthusiastic and experienced English speaking guide .",
+      "rating": 4.9,
+      "reviews": 2028,
+      "location": "Hanoi, Vietnam",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/9d/21/1d/caption.jpg",
+      "highlighted_review": {
+        "text": "So, this is the best thing to do in Hanoi.",
+        "highlighted_texts": [
+          "thing",
+          "do",
+          "Hanoi."
+        ],
+        "mention_count": 1
+      }
+    }
+  ],
+  "serpapi_pagination": {
+    "next": "https://serpapi.com/search.json?engine=tripadvisor&limit=30&offset=30&q=Things+to+do+in+Hanoi&ssrc=A&tripadvisor_domain=www.tripadvisor.com"
+  }
+}

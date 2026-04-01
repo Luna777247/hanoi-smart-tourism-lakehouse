@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.jupyter_ystore.db
+pipelines/airflow/logs/
+*.log
+.vscode/
+.env
+spark-warehouse/
+tmp/
+*.code-workspace
+.DS_Store
+.idea/

@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: silver
+    description: "Silver layer – cleaned and modelled Hanoi Tourism tables (Iceberg via Trino)"
+    database: iceberg
+    schema: silver
+    tables:
+      - name: dim_attraction
+        description: "Attraction dimension – one row per unique place_id (SCD1)"
+        columns:
+          - name: attraction_sk
+            description: "Surrogate key (xxhash64)"
+            tests: [unique, not_null]
+          - name: attraction_nk
+            description: "Natural key = Google place_id"
+            tests: [unique, not_null]
+          - name: name
+            tests: [not_null]
+          - name: district
+            tests: [not_null]
+          - name: lat
+            tests: [not_null]
+          - name: lng
+            tests: [not_null]
+
+      - name: fact_attraction_snapshot
+        description: "Daily snapshot – one row per (place_id, snapshot_date)"
+        columns:
+          - name: snapshot_sk
+            description: "Surrogate key (xxhash64 of place_id + date)"
+            tests: [unique, not_null]
+          - name: attraction_nk
+            tests: [not_null]
+          - name: snapshot_date
+            tests: [not_null]
+          - name: rating
+            description: "Google rating 0.0–5.0"
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  max_value: 5
+          - name: user_ratings_total
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  inclusive: true

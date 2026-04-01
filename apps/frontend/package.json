@@ -1,0 +1,12 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Sample frontend placeholder",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo 'No frontend app yet' && sleep 3600",
+    "build": "echo 'No build step'"
+  },
+  "author": "",
+  "license": "ISC"
+}

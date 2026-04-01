@@ -1,0 +1,429 @@
+{
+  "search_metadata": {
+    "id": "69c9f00ede1f33502545682c",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/AIhJiE6WbbehQjutnPKy8g/69c9f00ede1f33502545682c.json",
+    "created_at": "2026-03-30 03:37:50 UTC",
+    "processed_at": "2026-03-30 03:37:50 UTC",
+    "google_local_url": "https://www.google.com.vn/search?q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&uule=w+CAIQICINSGFub2ksVmlldG5hbQ&hl=vi&gl=vn&udm=1",
+    "raw_html_file": "https://serpapi.com/searches/AIhJiE6WbbehQjutnPKy8g/69c9f00ede1f33502545682c.html",
+    "total_time_taken": 1.89
+  },
+  "search_parameters": {
+    "engine": "google_local",
+    "q": "di tích lịch sử Hà Nội",
+    "location_requested": "Hanoi, Vietnam",
+    "location_used": "Hanoi,Vietnam",
+    "google_domain": "google.com.vn",
+    "hl": "vi",
+    "gl": "vn",
+    "device": "desktop"
+  },
+  "local_map": {
+    "gps_coordinates": {
+      "latitude": 21.035640574904598,
+      "longitude": 105.82099914550781
+    }
+  },
+  "local_results": [
+    {
+      "position": 1,
+      "rating": 5.0,
+      "reviews": 3,
+      "reviews_original": "(3)",
+      "lsig": "AB86z5XzRYrR0Ft1B_lb3PrnjYpz",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq3X_djjniVzmJdl7ptsPj00N7NRnSvdoayJSRA0Lt3hhCwC8IRV95BKMtsM1RPrW5dpeBEbg-HUaixEKhkSPeo-IpvxRZE6P9udmuAGxbSS-q91Zi0rCSepF8NCAzAthSwqm0O=w90-h90-n-k-no-l75",
+      "place_id": "15995274120248177494",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=15995274120248177494&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/1pp2v2sx2",
+      "gps_coordinates": {
+        "latitude": 21.046358,
+        "longitude": 105.84077
+      },
+      "title": "Di Tích Lịch Sử - Đình Ngũ Xã",
+      "type": "Địa điểm lịch sử",
+      "address": "16 P. Nguyễn Khắc Hiếu"
+    },
+    {
+      "position": 2,
+      "rating": 4.5,
+      "reviews": 21000,
+      "reviews_original": "(21 N)",
+      "description": "\"Di tích lịch sử của cha ông cần được bảo tồn thật tốt\"",
+      "lsig": "AB86z5WQJJi_kudypI_9LPuxgTe4",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/opo3xPjBJH_Vv-MSLxHgfRt42p-OcFjKXkuJOGOVBiM.jpeg",
+      "place_id": "10881225616060952404",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=10881225616060952404&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/m/0n9wp",
+      "gps_coordinates": {
+        "latitude": 21.025312,
+        "longitude": 105.846535
+      },
+      "title": "Di tích Nhà tù Hỏa Lò",
+      "type": "Bảo tàng lịch sử",
+      "address": "1 P. Hoả Lò"
+    },
+    {
+      "position": 3,
+      "rating": 4.6,
+      "reviews": 23000,
+      "reviews_original": "(23 N)",
+      "description": "\"Mong có 1 ngày được trải nghiệm tour đêm của khu di tích lịch sử\"",
+      "lsig": "AB86z5VcSrZE0a6AlY_FsuAqO_Ow",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/HcTB3E7tnbFkrWQylbkZC7T4s2LrJ7cyhkinHdmtT0o.jpeg",
+      "place_id": "6345017207668727582",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=6345017207668727582&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/m/0b9hjz",
+      "gps_coordinates": {
+        "latitude": 21.028118,
+        "longitude": 105.83567
+      },
+      "title": "Văn Miếu – Quốc Tử Giám",
+      "type": "Nơi thờ cúng",
+      "address": "58 Quốc Tử Giám"
+    },
+    {
+      "position": 4,
+      "rating": 4.4,
+      "reviews": 18000,
+      "reviews_original": "(18 N)",
+      "description": "\"Di tích lịch sử của Việt nam Đẹp - là nơi tham quan và chụp hình đẹp\"",
+      "lsig": "AB86z5UoTGfm3Dcd30VdIq8Md-Az",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/GuzBLkv9rIYrsfnchMq0360PTKPCNwbD45NI2o463qg.jpeg",
+      "place_id": "13051897747951069495",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=13051897747951069495&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/m/05zw9vk",
+      "gps_coordinates": {
+        "latitude": 21.035223,
+        "longitude": 105.840256
+      },
+      "title": "Hoàng Thành Thăng Long",
+      "type": "Điểm mốc lịch sử",
+      "address": "19c Hoàng Diệu"
+    },
+    {
+      "position": 5,
+      "lsig": "AB86z5U8SfVKnI81AE8Bss1mzI1a",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/4zMI7YIEJ1xupIbxDwN9otmRnBXbkOcr2VsWFgcUX_Y.webp",
+      "place_id": "12883167979466443297",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=12883167979466443297&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/11z3vx9x6q",
+      "gps_coordinates": {
+        "latitude": 21.020674,
+        "longitude": 105.80642
+      },
+      "title": "Di tích lịch sử Pháo Đài Láng",
+      "reviews_original": "Không có đánh giá nào",
+      "type": "Điểm mốc lịch sử",
+      "address": "77 Huỳnh Thúc Kháng"
+    },
+    {
+      "position": 6,
+      "rating": 4.5,
+      "reviews": 2400,
+      "reviews_original": "(2,4 N)",
+      "description": "\"Đây vừa là một di tích lịch sử, vừa là điểm tham quan khi đến Hà Nội.\"",
+      "lsig": "AB86z5VEhmr6-SiPbEAxHqs08EOI",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/mbL-UBhxWEpZW7xiiZqe9WF9Rx1Obgpd8lTDeO9AF3w.jpeg",
+      "place_id": "13289261682784701920",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=13289261682784701920&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/m/0f4qt8",
+      "gps_coordinates": {
+        "latitude": 21.032557,
+        "longitude": 105.839806
+      },
+      "title": "Cột cờ Hà Nội",
+      "type": "Điểm mốc lịch sử",
+      "address": "28A Điện Biên Phủ"
+    },
+    {
+      "position": 7,
+      "rating": 4.3,
+      "reviews": 10000,
+      "reviews_original": "(10 N)",
+      "description": "\"Một di tích lịch sử, một địa danh nên đến thăm quan.\"",
+      "lsig": "AB86z5VjZIV2tMKIqfDUBY_ENSmg",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/kqWyRaQYra32qxQGfZ95F-k9UYM4k3m6z0lCJFAt2YE.jpeg",
+      "place_id": "15845693668219404974",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=15845693668219404974&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/m/03mdcwc",
+      "gps_coordinates": {
+        "latitude": 21.035652,
+        "longitude": 105.833435
+      },
+      "title": "Chùa Một Cột",
+      "type": "Chùa phật giáo",
+      "address": "P. Chùa Một Cột"
+    },
+    {
+      "position": 8,
+      "rating": 4.3,
+      "reviews": 974,
+      "reviews_original": "(974)",
+      "description": "\"Là người con đất Việt, đây sẽ là địa điểm rất đáng để ghé thăm\"",
+      "lsig": "AB86z5XpWjrGHpO-EFIwFIWRYxkU",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoQVq7oWDwVbsspDh5GpyTQk5rBCsHESpdJRAIoFC410C7RkbZJep_hHeUr8Fl_NrSAqW4tN-8-pnjmRNNLKJ4k9rI1b9HNH1_eoPjJv_e_rOqp0TVFJTyRjr6h2bPy5yjwQoU=w90-h90-n-k-no-l75",
+      "place_id": "3835411855639801935",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=3835411855639801935&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/m/0b48zm",
+      "gps_coordinates": {
+        "latitude": 21.039291,
+        "longitude": 105.83456
+      },
+      "title": "Phủ Chủ tịch",
+      "type": "Văn phòng chính phủ",
+      "address": "2 Hùng Vương"
+    },
+    {
+      "position": 9,
+      "rating": 4.5,
+      "reviews": 1400,
+      "reviews_original": "(1,4 N)",
+      "description": "\"Di tích lịch sử đang được bảo tồn và đưa vào khai thác du lịch.\"",
+      "lsig": "AB86z5XeedCssIhaTvwm03wY67Ll",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/Vh_r8dBHWCEn4cqTlBKizQNNUK3Zj182S918mG5MK3g.jpeg",
+      "place_id": "14424671993093529795",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=14424671993093529795&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/1222zn1w",
+      "gps_coordinates": {
+        "latitude": 21.028776,
+        "longitude": 105.79539
+      },
+      "title": "Karaoke LONDON - Thành Thái",
+      "type": "Quán bar karaoke",
+      "address": "28 P. Thành Thái"
+    },
+    {
+      "position": 10,
+      "rating": 4.5,
+      "reviews": 20000,
+      "reviews_original": "(20 N)",
+      "description": "\"... Chủ tịch Hồ Chí Minh mở cửa trừ T2 và T6 nên mn lựa giờ để đi.\"",
+      "lsig": "AB86z5X_BKwwla4oxnqfgdZ9pFXu",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/bv2W78m7ODvztJHOPZ9QodcCo4ZnTw2_ktln7ADA-mA.jpeg",
+      "place_id": "7065731937148685644",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=7065731937148685644&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/m/02xbhg7",
+      "gps_coordinates": {
+        "latitude": 21.036898,
+        "longitude": 105.83466
+      },
+      "title": "Lăng Chủ tịch Hồ Chí Minh",
+      "type": "Điểm mốc lịch sử",
+      "address": "1 Hùng Vương",
+      "hours": "Đã đóng cửa · Mở cửa lúc 7:30 Thứ 3"
+    },
+    {
+      "position": 11,
+      "rating": 4.5,
+      "reviews": 1600,
+      "reviews_original": "(1,6 N)",
+      "description": "\"Đây là khu di tích lịch sử từ những ngày đầu Bác về Thủ đô làm việc\"",
+      "lsig": "AB86z5UD3fsc78Yc5AuxIvwQOAcE",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/LppJCPcZtvcpGz6yiOZSSK8RR0Ri2am0Zef0_iwo2b4.jpeg",
+      "place_id": "1572036078615223355",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=1572036078615223355&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/12xq69yv7",
+      "gps_coordinates": {
+        "latitude": 21.038158,
+        "longitude": 105.83317
+      },
+      "title": "Nhà sàn Bác Hồ",
+      "type": "Điểm mốc lịch sử",
+      "address": "1 Đ. Hoàng Hoa Thám",
+      "hours": "Sắp đóng cửa · 11:00"
+    },
+    {
+      "position": 12,
+      "rating": 4.6,
+      "reviews": 382,
+      "reviews_original": "(382)",
+      "description": "\"Đã được nhà nước công nhận là di tích lịch sử văn hóa cấp quốc gia.\"",
+      "lsig": "AB86z5W4meD7s3OE-uPmhjYayXpI",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoUxczzRJJphX7tPhQh95M036kWivNNeSxCfX90_HGO2LMbU09Ka3VUSihPJNx38jjN4q6Ti1mGWtYFOE-AmJs64clBi0c9JqB6HQbXuprtgbCaqFh6_E_OZfrUyeXmn_AL-v4=w90-h90-n-k-no-l75",
+      "place_id": "2792908928058991944",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=2792908928058991944&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/11cn3kgfv5",
+      "gps_coordinates": {
+        "latitude": 21.028578,
+        "longitude": 105.835846
+      },
+      "title": "Khuê Văn Các",
+      "type": "Địa điểm lịch sử",
+      "address": "2RHP+C8P, P.Tôn Đức Thắng"
+    },
+    {
+      "position": 13,
+      "rating": 4.3,
+      "reviews": 12,
+      "reviews_original": "(12)",
+      "description": "\"Kiến trúc bền vững\"",
+      "lsig": "AB86z5Us_ipiaCBxTs_u7B-Wwxxe",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/JLE5U7FItAdRsNpZArmNe8MIh24H-KCI6_hIhE5m2b4.jpeg",
+      "place_id": "6346419547174278896",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=6346419547174278896&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/11kpj2jbf4",
+      "gps_coordinates": {
+        "latitude": 21.024752,
+        "longitude": 105.84705
+      },
+      "title": "Di tích Toà Án Nhân Dân Tối Cao",
+      "type": "Điểm mốc lịch sử",
+      "address": "Vườn hoa Công lý, 43 P. Hai Bà Trưng",
+      "hours": "Đang mở cửa"
+    },
+    {
+      "position": 14,
+      "rating": 4.5,
+      "reviews": 3400,
+      "reviews_original": "(3,4 N)",
+      "description": "\"Cảnh vật mang bút tích của lịch sử: vừa cổ kính vừa trang nghiêm.\"",
+      "lsig": "AB86z5WVrEZ4597mrWNCZAeeVPtV",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/MGFRw4qerBBRI8FklBQKryRZxoyflSQ7SoJfae-pZ2I.jpeg",
+      "place_id": "10748477588497970910",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=10748477588497970910&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/m/026wy2x",
+      "gps_coordinates": {
+        "latitude": 21.112188,
+        "longitude": 105.87144
+      },
+      "title": "Lòng Chát Quán",
+      "type": "Điểm mốc lịch sử",
+      "address": "4V6C+VH",
+      "hours": "Sắp đóng cửa · 11:30"
+    },
+    {
+      "position": 15,
+      "rating": 4.6,
+      "reviews": 266,
+      "reviews_original": "(266)",
+      "description": "\"Di tích lịch sử đẹp, tôn nghiêm, giữ được kiến trúc nguyên bản.\"",
+      "lsig": "AB86z5W4d7zylgdCarM6X_eLTs-5",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/7HLTV5zZkWpzGSSxwGvivcq_t8QMt8yym3ZW3inpXwU.jpeg",
+      "place_id": "15565946398763643764",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=15565946398763643764&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/11btrqr8j4",
+      "gps_coordinates": {
+        "latitude": 21.02907,
+        "longitude": 105.85112
+      },
+      "title": "Đền thờ Vua Lê Thái Tổ",
+      "type": "Điểm mốc lịch sử",
+      "address": "16 P. Lê Thái Tổ"
+    },
+    {
+      "position": 16,
+      "lsig": "AB86z5XBHJY1Y065T8AUEo8aUZWK",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/raey4G02efJpoPu9PZlwxYxENes5iyPy7gWRIu0Z_fw.webp",
+      "place_id": "17810837429856994114",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=17810837429856994114&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/11x08j6vr4",
+      "gps_coordinates": {
+        "latitude": 21.03487,
+        "longitude": 105.81034
+      },
+      "title": "Di tích Lịch sử",
+      "reviews_original": "Không có đánh giá nào",
+      "type": "Nhà thờ",
+      "address": "ngõ Phạm Nguyễn Anh Vũ/Số 18 Linh Lang"
+    },
+    {
+      "position": 17,
+      "rating": 4.4,
+      "reviews": 382,
+      "reviews_original": "(382)",
+      "description": "\"Do bị trang trí cho sự kiện nên ko xem được kiến trúc đầy đủ.\"",
+      "lsig": "AB86z5V0N0Mjxo_qsMr137Gb-oui",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/xOdCCUk8BI3vMXgPjnk5e9cFyhUXD3wrqHXs88uppQ4.jpeg",
+      "place_id": "4730514291784287313",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=4730514291784287313&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/1q67mjsm2",
+      "gps_coordinates": {
+        "latitude": 21.036787,
+        "longitude": 105.840294
+      },
+      "title": "Điện Kính Thiên",
+      "type": "Điểm mốc lịch sử",
+      "address": "9 Hoàng Diệu"
+    },
+    {
+      "position": 18,
+      "rating": 4.4,
+      "reviews": 207,
+      "reviews_original": "(207)",
+      "description": "\"Trước đây, du khách cần đi qua cổng tam quan để vào được khu thờ tự.\"",
+      "lsig": "AB86z5XNtuys6kK3F2jFVVpy7_3K",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/usXNGFxC3ljIO_Cjg41eOiqms7rfilL5RkWXs2_DnTQ.jpeg",
+      "place_id": "5077618054553636269",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=5077618054553636269&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/1ym_l8159",
+      "gps_coordinates": {
+        "latitude": 21.031227,
+        "longitude": 105.85352
+      },
+      "title": "Đền Bà Kiệu",
+      "type": "Nơi thờ cúng",
+      "address": "59 Đinh Tiên Hoàng",
+      "hours": "Sắp đóng cửa · 11:30"
+    },
+    {
+      "position": 19,
+      "rating": 4.4,
+      "reviews": 223,
+      "reviews_original": "(223)",
+      "description": "\"Di tích lịch sử quan trọng, đáng để tới\"",
+      "lsig": "AB86z5W5Sae8XQZkceNCdrm2Iyyv",
+      "thumbnail": "https://serpapi.com/searches/69c9f00ede1f33502545682c/images/kT3spCyUvqYt6klsYR7cbniNxIML2DZIyNK-6nxRbww.jpeg",
+      "place_id": "10568351106465427662",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=10568351106465427662&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/11bxg5ns2n",
+      "gps_coordinates": {
+        "latitude": 21.012806,
+        "longitude": 105.82399
+      },
+      "title": "Tượng Đài Quang Trung",
+      "type": "Điểm thu hút khách du lịch",
+      "address": "P. Đặng Tiến Đông"
+    },
+    {
+      "position": 20,
+      "rating": 4.7,
+      "reviews": 6,
+      "reviews_original": "(6)",
+      "lsig": "AB86z5UfZiWlVo0eHgCXuNyLgdtE",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqyqnlHNAsF74qcQiAf1cRW9_xJUNNyssvk2S1po2F18hnlMZp9KOPn-4PjQYZXb-v_nGD74U6HgrMHiv6iUJsh8zK6irJCc0MAbtPzeJk_-H-5E1SEUpUBud1EeCRCLq6b4qIwdA=w90-h90-n-k-no-l75",
+      "place_id": "6304982306277893524",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&ludocid=6304982306277893524&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i",
+      "provider_id": "/g/11h90xmv6y",
+      "gps_coordinates": {
+        "latitude": 21.019966,
+        "longitude": 105.80818
+      },
+      "title": "Di tích Pháo đài Láng",
+      "type": "Điểm mốc lịch sử",
+      "address": "Huỳnh Thúc Kháng",
+      "hours": "Đang mở cửa"
+    }
+  ],
+  "pagination": {
+    "current": 1,
+    "next": "https://www.google.com.vn/search?q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&uule=w+CAIQICINSGFub2ksVmlldG5hbQ&hl=vi&gl=vn&start=20&udm=1",
+    "other_pages": {
+      "2": "https://www.google.com.vn/search?q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&uule=w+CAIQICINSGFub2ksVmlldG5hbQ&hl=vi&gl=vn&start=20&udm=1",
+      "3": "https://www.google.com.vn/search?q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&uule=w+CAIQICINSGFub2ksVmlldG5hbQ&hl=vi&gl=vn&start=40&udm=1",
+      "4": "https://www.google.com.vn/search?q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&uule=w+CAIQICINSGFub2ksVmlldG5hbQ&hl=vi&gl=vn&start=60&udm=1",
+      "5": "https://www.google.com.vn/search?q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&uule=w+CAIQICINSGFub2ksVmlldG5hbQ&hl=vi&gl=vn&start=80&udm=1"
+    }
+  },
+  "serpapi_pagination": {
+    "current": 1,
+    "next_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&start=20&uule=w+CAIQICINSGFub2ksVmlldG5hbQ",
+    "next": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&start=20&uule=w+CAIQICINSGFub2ksVmlldG5hbQ",
+    "other_pages": {
+      "2": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&start=20&uule=w+CAIQICINSGFub2ksVmlldG5hbQ",
+      "3": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&start=40&uule=w+CAIQICINSGFub2ksVmlldG5hbQ",
+      "4": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&start=60&uule=w+CAIQICINSGFub2ksVmlldG5hbQ",
+      "5": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=vn&google_domain=google.com.vn&hl=vi&location=Hanoi%2C+Vietnam&q=di+t%C3%ADch+l%E1%BB%8Bch+s%E1%BB%AD+H%C3%A0+N%E1%BB%99i&start=80&uule=w+CAIQICINSGFub2ksVmlldG5hbQ"
+    }
+  }
+}
