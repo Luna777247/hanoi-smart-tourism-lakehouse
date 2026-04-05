@@ -37,6 +37,9 @@ RUN uv pip install \
 # Create directories
 RUN mkdir -p /app/pythonpath /app/provisioning
 
+# Create empty config file for mounting
+RUN touch /app/pythonpath/superset_config_keycloak.py
+
 # Copy entrypoint scripts and config
 COPY create_admin.sh /app/pythonpath/create_admin.sh
 COPY worker-entrypoint.sh /app/pythonpath/worker-entrypoint.sh

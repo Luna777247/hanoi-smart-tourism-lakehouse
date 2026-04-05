@@ -22,7 +22,7 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id="hanoi_full_pipeline",
+    dag_id="master_hanoi_full_pipeline",
     description="End-to-end: Ingestion + Bronze + Silver + Gold + Quality",
     default_args=default_args,
     schedule_interval="0 3 * * 0",

@@ -35,6 +35,7 @@ class Settings(BaseSettings):
     # API Keys
     GOOGLE_PLACES_API_KEY: str = ""
     OPENWEATHER_API_KEY: str = ""
+    SERPAPI_KEY: str = ""
 
     # Hanoi config
     HANOI_LAT: float = 21.0285

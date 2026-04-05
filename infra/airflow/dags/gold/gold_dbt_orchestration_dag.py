@@ -11,11 +11,11 @@ import os
 CONNECTION_ID = "spark_default"
 SCHEMA_NAME = "iceberg.data_source"
 
-# Path to dbt project
-DBT_PROJECT_PATH = f"{os.environ['AIRFLOW_HOME']}/dags/dbt"
+# Path to dbt project (mounted via docker-compose)
+DBT_PROJECT_PATH = "/workspace/pipelines/dbt"
 
 # Path to dbt executable in virtual environment
-DBT_EXECUTABLE_PATH = f"{os.environ['AIRFLOW_HOME']}/dbt_venv/bin/dbt"
+DBT_EXECUTABLE_PATH = "/opt/airflow/dbt_venv/bin/dbt"
 
 profile_config = ProfileConfig(
     profile_name="dbt_vib",
@@ -32,6 +32,7 @@ execution_config = ExecutionConfig(
 )
 
 @dag(
+    dag_id="gold_dbt_full_orchestration",
     schedule=None,
     catchup=False,
     tags=['dbt', 'iceberg', 'spark'],

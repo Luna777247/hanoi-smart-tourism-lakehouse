@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: bronze_hanoi
+    database: iceberg
+    schema: bronze
+    tables:
+      - name: hanoi_attractions
+        description: "Dữ liệu địa điểm du lịch từ Google Places API"
+      - name: hanoi_tripadvisor
+        description: "Dữ liệu địa điểm du lịch từ Tripadvisor (via SerpApi)"
+      - name: hanoi_osm
+        description: "Dữ liệu địa điểm du lịch từ OpenStreetMap (Overpass)"

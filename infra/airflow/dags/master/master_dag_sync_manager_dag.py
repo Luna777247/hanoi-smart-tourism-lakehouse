@@ -51,7 +51,7 @@ def sync_from_s3():
 
 # Airflow 3.x sử dụng 'schedule' thay cho 'schedule_interval'
 with DAG(
-    'a_minio_assets_syncer', 
+    'master_dag_sync_manager', 
     schedule='@hourly', 
     start_date=datetime(2025, 1, 1), 
     catchup=False,

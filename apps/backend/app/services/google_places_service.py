@@ -10,18 +10,18 @@ logger = logging.getLogger(__name__)
 PLACES_BASE_URL = "https://maps.googleapis.com/maps/api/place"
 
 HANOI_ATTRACTION_TYPES = [
-    "tourist_attraction",
-    "museum",
-    "art_gallery",
-    "park",
-    "place_of_worship",
-    "amusement_park",
-    "zoo",
-    "aquarium",
-    "stadium",
-    "night_club",
-    "restaurant",
-    "shopping_mall",
+    "tourist_attraction" # Điểm tham quan chính
+    # "museum",             # Bảo tàng
+    # "art_gallery",        # Phòng tranh/Nghệ thuật
+    # "landmark",           # Các cột mốc di tích (Cột cờ Hà Nội, Văn Miếu...)
+    # "place_of_worship",   # Các nơi tâm linh (Chùa, Đền)
+    # "church",             # Nhà thờ (Nhà thờ Lớn...)
+    # "hindu_temple",       # Đền chùa (Chùa Trấn Quốc...)
+    # "park",               # Công viên trung tâm (Hồ Gươm, Hồ Tây...)
+    # "amusement_park",     # Khu vui chơi giải trí
+    # "zoo",                # Vườn thú/Thủy cung
+    # "aquarium",
+    # "memorial",           # Đài tưởng niệm/Di tích lịch sử
 ]
 
 

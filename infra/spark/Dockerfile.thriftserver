@@ -23,13 +23,13 @@ ENV HADOOP_USER_NAME=spark
 
 # Copy all required files
 COPY start-thriftserver.sh /opt/start-thriftserver.sh
-COPY ranger-2.7.1-SNAPSHOT-hive-plugin.tar.gz /opt/ranger-2.7.1-SNAPSHOT-hive-plugin.tar.gz
-COPY install.properties /opt/install.properties
+# COPY ranger-2.7.1-SNAPSHOT-hive-plugin.tar.gz /opt/ranger-2.7.1-SNAPSHOT-hive-plugin.tar.gz
+# COPY install.properties /opt/install.properties
 
 # Copy Ranger configuration files vào đúng thư mục conf
-COPY ranger-hive-security.xml /opt/bitnami/spark/conf/ranger-hive-security.xml
-COPY ranger-hive-audit.xml /opt/bitnami/spark/conf/ranger-hive-audit.xml
-COPY ranger-policymgr-ssl.xml /opt/bitnami/spark/conf/ranger-policymgr-ssl.xml
+# COPY ranger-hive-security.xml /opt/bitnami/spark/conf/ranger-hive-security.xml
+# COPY ranger-hive-audit.xml /opt/bitnami/spark/conf/ranger-hive-audit.xml
+# COPY ranger-policymgr-ssl.xml /opt/bitnami/spark/conf/ranger-policymgr-ssl.xml
 COPY hive-site.xml /opt/bitnami/spark/conf/hive-site.xml
 COPY core-site.xml /opt/bitnami/spark/conf/core-site.xml
 

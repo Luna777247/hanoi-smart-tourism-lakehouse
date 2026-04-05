@@ -27,7 +27,7 @@ echo ""
 
 # Wait for PostgreSQL to be ready
 echo "[1/5] Waiting for PostgreSQL to be ready..."
-until pg_isready -U "$PGUSER" -d "$PGDB" -h "$PGHOST" >/dev/null 2>&1; do
+until pg_isready -U "$PGUSER" -d postgres -h "$PGHOST" >/dev/null 2>&1; do
   echo "  → Waiting for PostgreSQL..."
   sleep 2
 done
@@ -68,6 +68,23 @@ if ! psql -U "$PGUSER" -d "$PGDB" -tAc "SELECT 1 FROM pg_database WHERE datname 
 else
   echo "  ✓ Superset database already exists"
 fi
+
+# ============================================
+# Create Multiple Databases from Environment Variable
+# ============================================
+IFS=',' read -ra ADDS <<< "${POSTGRES_MULTIPLE_DATABASES:-}"
+for db in "${ADDS[@]}"; do
+  db=$(echo "$db" | xargs) # trim whitespace
+  if [[ -n "$db" && "$db" != "postgres" && "$db" != "demo" && "$db" != "superset" && "$db" != "${RANGER_DB}" ]]; then
+    if ! psql -U "$PGUSER" -d "$PGDB" -tAc "SELECT 1 FROM pg_database WHERE datname = '$db'" | grep -q 1; then
+      echo "  → Creating $db database..."
+      psql -U "$PGUSER" -d "$PGDB" -v ON_ERROR_STOP=1 -c "CREATE DATABASE \"$db\";"
+      echo "  ✓ $db database created"
+    else
+      echo "  ✓ $db database already exists"
+    fi
+  fi
+done
 
 echo ""
 

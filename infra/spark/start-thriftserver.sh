@@ -21,51 +21,40 @@ else
     echo "✗ ranger-hive-audit.xml NOT found"
 fi
 
-echo "=== Installing Ranger Plugin ==="
-RANGER_VERSION=ranger-2.7.1-SNAPSHOT-hive-plugin
+# echo "=== Installing Ranger Plugin ==="
+# RANGER_VERSION=ranger-2.7.1-SNAPSHOT-hive-plugin
+# 
+# cd /opt/hive
+# tar xvf /opt/${RANGER_VERSION}.tar.gz --strip-components=1 -C .
+# cp -f /opt/install.properties .
+# 
+# if [ -f ./enable-hive-plugin.sh ]; then
+#     dos2unix ./enable-hive-plugin.sh 2>/dev/null || true
+#     chmod +x ./enable-hive-plugin.sh
+#     
+#     # Sửa COMPONENT_INSTALL_DIR trong script để trỏ đúng
+#     sed -i 's|COMPONENT_INSTALL_DIR=.*|COMPONENT_INSTALL_DIR=/opt/bitnami/spark|g' enable-hive-plugin.sh 2>/dev/null || true
+#     
+#     echo "=== Running enable-hive-plugin.sh ==="
+#     ./enable-hive-plugin.sh || echo "Warning: Plugin installation had issues"
+# fi
+# 
+# echo "=== Copying Ranger JARs to Spark ==="
+# if [ -d "./lib" ]; then
+#     echo "Copying JAR files from /opt/hive/lib to /opt/spark/jars/"
+#     cp -v ./lib/*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No ranger JAR files found"
+#     cp -v ./install/lib/*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No ranger JAR files found"
+#     cp -v ./lib/ranger-hive-plugin-impl/*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No ranger JAR files found"
+#     cp -v ./lib/eclipselink*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No eclipselink JAR files found"
+#     cp -v ./lib/commons-configuration*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No commons-configuration JAR files found"
+# else
+#     echo "Warning: /opt/hive/lib directory not found"
+# fi
 
-cd /opt/hive
-tar xvf /opt/${RANGER_VERSION}.tar.gz --strip-components=1 -C .
-cp -f /opt/install.properties .
-
-if [ -f ./enable-hive-plugin.sh ]; then
-    dos2unix ./enable-hive-plugin.sh 2>/dev/null || true
-    chmod +x ./enable-hive-plugin.sh
-    
-    # Sửa COMPONENT_INSTALL_DIR trong script để trỏ đúng
-    sed -i 's|COMPONENT_INSTALL_DIR=.*|COMPONENT_INSTALL_DIR=/opt/bitnami/spark|g' enable-hive-plugin.sh 2>/dev/null || true
-    
-    echo "=== Running enable-hive-plugin.sh ==="
-    ./enable-hive-plugin.sh || echo "Warning: Plugin installation had issues"
-fi
-
-echo "=== Copying Ranger JARs to Spark ==="
-if [ -d "./lib" ]; then
-    echo "Copying JAR files from /opt/hive/lib to /opt/spark/jars/"
-    cp -v ./lib/*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No ranger JAR files found"
-    cp -v ./install/lib/*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No ranger JAR files found"
-    cp -v ./lib/ranger-hive-plugin-impl/*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No ranger JAR files found"
-    cp -v ./lib/eclipselink*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No eclipselink JAR files found"
-    cp -v ./lib/commons-configuration*.jar /opt/bitnami/spark/jars/ 2>/dev/null || echo "No commons-configuration JAR files found"
-else
-    echo "Warning: /opt/hive/lib directory not found"
-fi
-
-echo "=== Verifying Ranger Installation ==="
-echo ""
-echo "Config files in /opt/bitnami/spark/conf/:"
-ls -lah /opt/bitnami/spark/conf/ranger-* 2>/dev/null || echo "No ranger config files found"
-
+echo "=== Verifying JARs ==="
 echo ""
 echo "JAR files in /opt/bitnami/spark/jars/:"
-ls -lah /opt/bitnami/spark/jars/ranger-* 2>/dev/null || echo "No ranger JAR files found"
-
-echo ""
-echo "All XML files in conf:"
-ls -lah /opt/bitnami/spark/conf/*.xml 2>/dev/null || echo "No XML files found"  
-echo "=== Setting permissions ==="
-chmod -R 755 /tmp/ranger 2>/dev/null || true
-chown -R spark:spark /tmp/ranger 2>/dev/null || true
+ls -lah /opt/bitnami/spark/jars/iceberg-* 2>/dev/null || echo "No Iceberg JAR files found"
 
 echo "=== Starting Spark Thrift Server ==="
 /opt/bitnami/spark/sbin/start-thriftserver.sh \
@@ -75,9 +64,7 @@ echo "=== Starting Spark Thrift Server ==="
   --hiveconf hive.server2.thrift.bind.host=0.0.0.0 \
   --hiveconf hive.server2.authentication=NONE \
   --hiveconf hive.server2.enable.doAs=false \
-  --hiveconf hive.security.authorization.enabled=true \
-  --hiveconf hive.security.authorization.manager=org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizerFactory \
-  --hiveconf hive.security.authenticator.manager=org.apache.hadoop.hive.ql.security.SessionStateUserAuthenticator \
+  --hiveconf hive.security.authorization.enabled=false \
   --conf spark.sql.catalog.iceberg=org.apache.iceberg.spark.SparkCatalog \
   --conf spark.sql.catalog.iceberg.type=hive \
   --conf spark.sql.catalog.iceberg.uri=thrift://hive-metastore:9083 \

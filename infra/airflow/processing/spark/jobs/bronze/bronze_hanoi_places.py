@@ -175,37 +175,51 @@ SPARK_SCHEMA = T.StructType([
 
 def ingest(
     spark: SparkSession,
-    api_key: str,
+    input_path: str,
     *,
-    queries: list[str] | None = None,
     table: str = BRONZE_TABLE,
 ) -> int:
-    """Collect all API results and write to Bronze Iceberg table.
+    """Read raw JSON from Landing Zone and write to Bronze Iceberg table.
 
     Returns the number of records written.
     """
     ingested_at = datetime.utcnow()
-    today = ingested_at.date()
-    active_queries = queries or SEARCH_QUERIES
-
-    # ── Collect from API (runs on driver – API rate limits prevent parallelism)
-    records: list[dict] = []
-    seen_place_ids: set[str] = set()  # deduplicate across queries
-
-    for query in active_queries:
-        for result, q, token in fetch_all_pages(query, api_key):
-            pid = result.get("place_id")
-            if pid and pid in seen_place_ids:
-                continue  # skip cross-query duplicates
-            if pid:
-                seen_place_ids.add(pid)
-            records.append(_flatten_result(result, q, token, ingested_at))
-
-    logger.info("COLLECTION_COMPLETE | total_unique=%d | date=%s", len(records), today)
-
-    if not records:
+    
+    # ── Read from MinIO (Landing Zone)
+    logger.info(f"READ_START | path={input_path}")
+    df_raw = spark.read.option("multiline", "true").json(input_path)
+    
+    if df_raw.count() == 0:
         logger.warning("NO_RECORDS | skipping write")
         return 0
+
+    # ── Flatten (Transformation logic)
+    # We use a UDF or direct Spark SQL to flatten if needed, 
+    # but here we can just map the fields if the schema matches.
+    
+    # Let's map the fields precisely as defined in SPARK_SCHEMA
+    # Note: _flatten_result was used earlier in the driver, now we do it in Spark
+    
+    df_flattened = df_raw.select(
+        F.col("place_id"),
+        F.col("name"),
+        F.col("formatted_address"),
+        F.col("geometry.location.lat").alias("lat"),
+        F.col("geometry.location.lng").alias("lng"),
+        F.col("rating"),
+        F.col("user_ratings_total"),
+        F.col("price_level"),
+        F.col("business_status"),
+        F.to_json(F.col("types")).alias("types"),
+        F.col("opening_hours.open_now").alias("opening_hours_open_now"),
+        F.col("icon"),
+        F.col("vicinity"),
+        F.to_json(F.struct("*")).alias("raw_json"), # original record as JSON string
+        F.lit("json_landing").alias("source_query"),
+        F.lit(None).cast("string").alias("page_token"),
+        F.lit(ingested_at).alias("ingested_at"),
+        F.lit(ingested_at.date()).alias("ingestion_date")
+    )
 
     # ── Create Iceberg table if not exists
     ensure_schema(spark, "iceberg.bronze")
@@ -214,32 +228,56 @@ def ingest(
         table,
         BRONZE_COLUMNS_SQL,
         partition_field="ingestion_date",
-        table_properties={"write.target-file-size-bytes": "67108864"},  # 64 MB
+        table_properties={"write.target-file-size-bytes": "67108864"},
     )
 
-    # ── Build DataFrame and write
+    # ── Build DataFrame and create temp view
+    df_flattened.createOrReplaceTempView("stg_places")
+
+    # ── Build DataFrame and create temp view
     df: DataFrame = spark.createDataFrame(records, schema=SPARK_SCHEMA)
+    df.createOrReplaceTempView("stg_places")
 
-    # Overwrite today's partition (idempotent re-runs)
-    (
-        df.writeTo(table)
-        .option("partition-spec", f"ingestion_date='{today}'")
-        .overwritePartitions()
-    )
+    # ── MERGE INTO (Insert + Update by place_id)
+    merge_sql = f"""
+        MERGE INTO {table} t
+        USING stg_places s
+        ON t.place_id = s.place_id
+        WHEN MATCHED THEN
+          UPDATE SET 
+            t.name = s.name,
+            t.formatted_address = s.formatted_address,
+            t.lat = s.lat,
+            t.lng = s.lng,
+            t.rating = s.rating,
+            t.user_ratings_total = s.user_ratings_total,
+            t.price_level = s.price_level,
+            t.business_status = s.business_status,
+            t.types = s.types,
+            t.opening_hours_open_now = s.opening_hours_open_now,
+            t.icon = s.icon,
+            t.vicinity = s.vicinity,
+            t.raw_json = s.raw_json,
+            t.source_query = s.source_query,
+            t.page_token = s.page_token,
+            t.ingested_at = s.ingested_at,
+            t.ingestion_date = s.ingestion_date
+        WHEN NOT MATCHED THEN
+          INSERT *
+    """
+    
+    logger.info(f"Executing MERGE INTO for {table}...")
+    spark.sql(merge_sql)
 
-    count = df.count()
-    logger.info("WRITE_COMPLETE | table=%s | records=%d | partition=%s", table, count, today)
+    count = df_flattened.count()
+    logger.info("WRITE_COMPLETE | table=%s | records=%d | status=upserted", table, count)
     return count
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Bronze ingestion: Google Places → Iceberg")
+    parser = argparse.ArgumentParser(description="Bronze ingestion: Google Places JSON -> Iceberg")
     parser.add_argument("--table", default=BRONZE_TABLE, help="Target Iceberg table")
-    parser.add_argument(
-        "--queries",
-        default=",".join(SEARCH_QUERIES),
-        help="Comma-separated search queries (default: predefined Hanoi queries)",
-    )
+    parser.add_argument("--input-path", required=True, help="Input path for raw JSON files")
     return parser.parse_args()
 
 
@@ -250,19 +288,11 @@ def main() -> None:
     )
     args = parse_args()
 
-    api_key = os.environ.get("GOOGLE_PLACES_API_KEY", "")
-    if not api_key:
-        raise EnvironmentError(
-            "GOOGLE_PLACES_API_KEY not set. "
-            "Add it to .env or inject from HashiCorp Vault (secret/platform/google_places)."
-        )
-
-    queries = [q.strip() for q in args.queries.split(",") if q.strip()]
     spark = build_spark(APP_NAME)
     spark.sparkContext.setLogLevel("WARN")
 
     try:
-        count = ingest(spark, api_key, queries=queries, table=args.table)
+        count = ingest(spark, input_path=args.input_path, table=args.table)
         logger.info("JOB_SUCCESS | records=%d", count)
     except Exception as exc:
         logger.error("JOB_FAILED | error=%s", exc)
