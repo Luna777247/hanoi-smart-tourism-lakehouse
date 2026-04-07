@@ -1,4 +1,5 @@
 import os
+import sys
 from typing import Dict
 
 from airflow import DAG
@@ -13,6 +14,7 @@ from _spark_common import (
     spark_packages,
     spark_utils_py_files,
 )
+sys.path.append(spark_job_base())
 from silver import TABLE_BUILDERS, TableBuilder
 
 

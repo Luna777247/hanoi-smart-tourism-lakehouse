@@ -2,9 +2,10 @@
 DAG: master_iceberg_compaction
 Mô tả: Tối ưu hoá file nhỏ (Small Files Problem) cho Iceberg bằng cách gọi REWRITE_DATA_FILES.
 """
+from datetime import datetime
 from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_sql import SparkSqlOperator
-from airflow.utils.dates import days_ago
+# from airflow.utils.dates import days_ago
 
 default_args = {
     "owner": "DataForge",
@@ -13,8 +14,8 @@ default_args = {
 
 with DAG(
     dag_id="master_iceberg_compaction",
-    schedule_interval="0 0 * * 0",  # Chạy hàng tuần vào CN
-    start_date=days_ago(1),
+    schedule="0 0 * * 0",  # Chạy hàng tuần vào CN
+    start_date=datetime(2025, 1, 1),
     catchup=False,
     tags=["maintenance", "iceberg", "compaction"],
     default_args=default_args,

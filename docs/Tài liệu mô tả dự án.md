@@ -6,6 +6,27 @@
 
 Nền tảng được thiết kế theo kiến trúc **Data Lakehouse** hiện đại với mô hình **Medallion Architecture (Bronze → Silver → Gold)**, kết hợp tự động hóa quy trình và các công cụ quản trị dữ liệu chuyên sâu.
 
+### 1.1. Bối cảnh và Tính cấp thiết
+
+Tại Hà Nội, đã có nhiều nỗ lực số hóa ngành du lịch thông qua các dự án của các tập đoàn công nghệ lớn (VNPT, FPT) phối hợp cùng cơ quan chức năng. Tuy nhiên, qua phân tích thực trạng, các hệ thống này vẫn tồn tại những khoảng trống mà dự án này tập trung khắc phục:
+
+*   **Các Portal và App du lịch hiện có (Ví dụ: HanoiTourism App, Cổng thông tin du lịch tỉnh/thành):**
+    *   *Đã làm được:* Cung cấp thông tin giới thiệu địa danh, bản đồ số cơ bản và tra cứu dịch vụ lưu trú.
+    *   *Nhược điểm:* Dữ liệu mang tính "tĩnh", phụ thuộc vào việc nhập liệu của ban quản lý. Thiếu khả năng thu thập và phân tích "hơi thở" thực tế của khách du lịch từ các nền tảng mở như Google Reviews hay Tripadvisor.
+    *   *Dự án này khắc phục:* Sử dụng **Hybrid Ingestion** để tự động kéo dữ liệu đánh giá và rating thực tế mỗi ngày từ API quốc tế, mang lại cái nhìn khách quan và cập nhật nhất.
+
+*   **Các hệ thống báo cáo thống kê định kỳ của ngành:**
+    *   *Đã làm được:* Thống kê lượt khách, doanh thu và công suất phòng thông qua các báo cáo định kỳ (Excel/PDF).
+    *   *Nhược điểm:* **Độ trễ (Latency) cực lớn**. Khi nhà quản lý nhận được báo cáo, dữ liệu thường đã cũ (theo tháng/quý), không thể dùng để xử lý các tình huống tức thời như quá tải điểm đến.
+    *   *Dự án này khắc phục:* Xây dựng **Data Pipeline tự động hóa 100%**, chuyển đổi từ "hệ thống báo cáo" sang "nền tảng giám sát thời gian thực", cho phép phát hiện xu hướng và cảnh báo ngay lập tức.
+
+*   **Các nghiên cứu học thuật về Smart Tourism tại Việt Nam:**
+    *   *Đã làm được:* Đề xuất các khung lý thuyết, chỉ số đánh giá điểm đến thông minh.
+    *   *Nhược điểm:* Thường dừng lại ở mức **Prototype (mô hình thử nghiệm)**, thiếu một hạ tầng dữ liệu lớn (Big Data) đủ mạnh để xử lý và lưu trữ hàng triệu bản ghi từ nhiều nguồn khác nhau.
+    *   *Dự án này khắc phục:* Áp dụng kiến trúc **Data Lakehouse (Apache Iceberg)** chuẩn công nghiệp, sẵn sàng cho việc mở rộng quy mô dữ liệu toàn quốc, tích hợp đầy đủ quy trình quản trị (Data Governance) và kiểm định chất lượng (Data Quality) mà các nghiên cứu trước đây chưa triển khai thực tế.
+
+**Tóm lại, dự án Hanoi Smart Tourism Lakehouse không lặp lại những gì đã có, mà đóng vai trò là "Trục hạ tầng dữ liệu thông minh" giúp kết nối và tối ưu hóa toàn bộ hệ sinh thái du lịch Thủ đô.**
+
 ## 2. Mục tiêu chính
 - Xây dựng quy trình thu thập(insert + update theo id) dữ liệu tự động từ các API công khai (Google Local API, Tripadvisor, overpassapi(lấy danh sách) + Nomation(lấy thông tin chi tiết)) và lưu trữ vào Data Lakehouse tầng Bronze(Minio).
 - Xây dựng Data Lakehouse hoàn chỉnh, mở rộng, xử lý batch hiệu quả, truy vấn nhanh, tầng silver xử lý làm sạch , loại bỏ những dữ liệu thừa và không liên quan, tầng gold xử lý tổng hợp dữ liệu để phục vụ cho việc phân tích và báo cáo.
@@ -132,4 +153,32 @@ Hệ thống áp dụng chiến lược **Hybrid Ingestion** (Lai ghép) nhằm 
 - **Thúc đẩy Chuyển đổi số:** Xây dựng một "Trục dữ liệu số" (Digital Data Backbone) cho ngành du lịch Thủ đô, sẵn sàng tích hợp với các hệ thống Smart City khác trong tương lai.
 127: 
 128: ## 9. So sánh với các nghiên cứu & hệ thống hiện có
-129: Chi tiết về những điểm mới (Novelty) và ưu thế vượt trội của dự án so với các hệ thống du lịch thông minh và nghiên cứu hiện nay có thể xem tại: [So sánh nghiên cứu liên quan](file:///d:/hanoi-smart-tourism-lakehouse/docs/So_sanh_nghien_cuu_lien_quan.md)
+
+Bản so sánh này làm nổi bật những điểm mới, sự khác biệt và ưu thế vượt trội của nền tảng **Hanoi Smart Tourism Data Lakehouse** so với các nghiên cứu hàn lâm và các hệ sinh thái du lịch thông minh hiện có tại Việt Nam (như của các tập đoàn VNPT, FPT hay các dự án của Sở Du lịch).
+
+### 9.1. Bảng so sánh tổng quan
+
+| Tiêu chí | Hệ thống hiện có tại VN | Nghiên cứu Smart Tourism (Hàn lâm) | Dự án Hanoi Smart Tourism Lakehouse |
+| :--- | :--- | :--- | :--- |
+| **Kiến trúc dữ liệu** | Data Warehouse truyền thống hoặc Database tập trung | Đề xuất kiến trúc Data Lake sơ khai | **Data Lakehouse (Apache Iceberg)** - Kết hợp ưu điểm của cả Lake và Warehouse |
+| **Cơ chế thu thập** | Nhập liệu thủ công hoặc API đồng bộ chậm | Tập trung vào IoT hoặc Social Media đơn lẻ | **Hybrid Ingestion (API + Real-time CDC)** - Đồng bộ thời gian thực từ DB nội bộ và API quốc tế |
+| **Quản trị dữ liệu** | Khép kín, khó truy vết (Lineage) | Thường bị bỏ qua trong mô hình nghiên cứu | **Full Data Governance (OpenMetadata)** - Tự động hóa Lineage từ nguồn đến Dashboard |
+| **Chất lượng dữ liệu** | Kiểm tra thủ công hoặc định kỳ | Đề xuất lý thuyết về chất lượng | **Automated DQ (Great Expectations)** - Kiểm định tự động ngay trong Pipeline |
+| **Công cụ xử lý** | Proprietary (Độc quyền, đóng gói) | Python/R xử lý Batch đơn giản | **Modern Data Stack (Spark, dbt, Trino)** - Chuẩn công nghiệp, hiệu năng cực cao |
+| **Khả năng mở rộng** | Khó mở rộng, phụ thuộc nhà cung cấp | Thường chỉ là bản thử nghiệm (Prototype) | **Cloud-native, Containerized** - Dễ dàng mở rộng ngang với Docker/Kubernetes |
+
+### 9.2. Những điểm "Mới" (Novelty)
+
+*   **Áp dụng kiến trúc Medallion trên nền tảng Lakehouse:** Thay vì chỉ lưu trữ dữ liệu thô (Lake) hoặc dữ liệu đã qua xử lý (Warehouse), dự án áp dụng mô hình **Medallion (Bronze → Silver → Gold)** trên định dạng bảng **Apache Iceberg**. Cho phép **Time Travel** và **Schema Evolution**.
+*   **Cơ chế Hybrid Ingestion vượt trội:** Dự án không chỉ kéo dữ liệu từ API (Google, Tripadvisor) mà còn tích hợp công nghệ **CDC (Change Data Capture)** qua Debezium và Kafka. Đây là phương pháp hiện đại nhất giúp đồng bộ dữ liệu từ các hệ thống di sản mà không gây tải cho Database nguồn.
+*   **Cổng quản trị tập trung (Management Portal):** Dự án xây dựng một Portal riêng (Next.js 15 + FastAPI) đóng vai trò là "bộ não" điều khiển toàn bộ hệ thống, hỗ trợ cấu hình Dynamic Ingestion mà không cần sửa code.
+
+### 9.3. Những điểm "Hơn" (Advantages)
+
+*   **Quản trị và Tin cậy (Governance & Trust):** Với **OpenMetadata** và **Great Expectations**, mọi con số trên Dashboard đều có "giấy khai sinh" (Lineage) và "giấy chứng nhận chất lượng" (Validation).
+*   **Hiệu năng truy vấn quy mô lớn:** Sử dụng **Trino** làm Query Engine, cho phép truy vấn trực tiếp trên tầng lưu trữ Cloud (MinIO) với tốc độ tương đương các database đắt tiền.
+*   **Phân tích sâu về "Sức khỏe" điểm đến:** Tập trung vào **phân tích xu hướng chất lượng (Trend Analysis)** và **Cảnh báo quá tải (Overcrowding Alerts)** dựa trên sự biến động của tương tác số, giúp quản lý du lịch chuyển từ "chờ báo cáo" sang "chủ động dự báo".
+*   **Tự chủ công nghệ (Open Source Stack):** Hoàn toàn dựa trên các công nghệ mã nguồn mở hàng đầu, giảm chi phí bản quyền và tránh "khóa chặt" nhà cung cấp (Vendor lock-in).
+
+### 9.4. Kết luận
+Dự án **Hanoi Smart Tourism Lakehouse** không chỉ đơn thuần là một hệ thống báo cáo, mà là một **Nền tảng hạ tầng dữ liệu thế hệ mới**, lấp đầy khoảng trống giữa nghiên cứu lý thuyết và ứng dụng thực tế tại Việt Nam.

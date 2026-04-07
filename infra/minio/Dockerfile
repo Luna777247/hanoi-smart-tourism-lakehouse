@@ -8,6 +8,11 @@ FROM minio/mc:latest AS mc-builder
 FROM minio/minio:latest as final
 COPY --from=mc-builder /usr/bin/mc /usr/bin/mc
 
+# Cài đặt sed, grep và bash (UBI-minimal use microdnf)
+RUN microdnf update -y && \
+    microdnf install -y sed grep curl bash && \
+    microdnf clean all
+
 # Sao chép config và script
 COPY config/ /root/.minio/
 COPY setup-minio.sh /usr/local/bin/setup-minio.sh

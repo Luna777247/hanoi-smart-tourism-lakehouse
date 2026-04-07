@@ -2,10 +2,10 @@
 DAG: hanoi_tourism_ingestion
 Mô tả: Master Ingestion DAG – Kích hoạt các luồng thu thập dữ liệu Bronze (Google, OSM, Tripadvisor)
 """
-from datetime import timedelta
+from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
-from airflow.utils.dates import days_ago
+# from airflow.utils.dates import days_ago
 
 default_args = {
     "owner": "tourism-team",
@@ -18,8 +18,8 @@ default_args = {
 with DAG(
     dag_id="hanoi_tourism_ingestion",
     description="Orchestrator for all Bronze Ingestion DAGs",
-    schedule_interval="0 0 * * *",  # Hàng ngày lúc 00:00 UTC (07:00 ICT)
-    start_date=days_ago(1),
+    schedule="0 0 * * *",  # Hàng ngày lúc 00:00 UTC (07:00 ICT)
+    start_date=datetime(2025, 1, 1),
     catchup=False,
     default_args=default_args,
     tags=["master", "ingestion", "bronze"],

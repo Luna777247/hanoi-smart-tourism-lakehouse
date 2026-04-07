@@ -14,7 +14,7 @@ from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
-from airflow.utils.dates import days_ago
+# from airflow.utils.dates import days_ago
 
 from _spark_common import (
     iceberg_dataset,
@@ -64,8 +64,8 @@ INGESTION_WEATHER = os.path.join(spark_job_base(), "ingestion", "fetch_hanoi_wea
 with DAG(
     dag_id="bronze_hanoi_google",
     description="2-Stage Ingestion: API -> Raw JSON (Landing) -> Iceberg (Bronze)",
-    schedule_interval="0 19 * * *",  # 02:00 ICT
-    start_date=days_ago(1),
+    schedule="0 19 * * *",  # 02:00 ICT
+    start_date=datetime(2025, 1, 1),
     catchup=False,
     default_args=default_args,
     max_active_runs=1,

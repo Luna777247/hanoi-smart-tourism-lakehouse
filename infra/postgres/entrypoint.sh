@@ -34,7 +34,7 @@ export POSTGRES_PASSWORD
 POSTGRES_CDC_PASSWORD=$(vault_fetch "platform/postgres" "cdc_password" "${POSTGRES_CDC_PASSWORD:-cdc_reader_pwd}")
 export POSTGRES_CDC_PASSWORD
 
-docker-entrypoint.sh postgres &
+docker-entrypoint.sh "$@" &
 POSTGRES_PID=$!
 
 /init-databases.sh

@@ -13,7 +13,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.providers.standard.operators.python import PythonOperator
-from airflow.utils.dates import days_ago
+# from airflow.utils.dates import days_ago
 
 logger = logging.getLogger(__name__)
 
@@ -59,8 +59,8 @@ with DAG(
 1. **Landing**: Python fetches from Overpass API and saves to MinIO as JSON.
 2. **Bronze**: Spark reads JSON from MinIO and upserts into `iceberg.bronze.hanoi_osm`.
     """,
-    start_date=days_ago(1),
-    schedule_interval="0 20 * * 5",   # 03:00 ICT on Saturday
+    start_date=datetime(2025, 1, 1),
+    schedule="0 20 * * 5",   # 03:00 ICT on Saturday
     catchup=False,
     default_args=default_args,
     max_active_runs=1,

@@ -11,9 +11,10 @@ Models run in dependency order as resolved by dbt DAG:
 """
 
 import os
+from datetime import datetime
 
 from airflow import DAG
-from airflow.utils.dates import days_ago
+# from airflow.utils.dates import days_ago
 
 try:
     # Cosmos provides native dbt task integration (already in requirements.txt)
@@ -28,8 +29,8 @@ from _spark_common import iceberg_dataset
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 
-DBT_PROJECT_DIR = os.getenv("DBT_PROJECT_DIR", "/workspace/pipelines/dbt")
-DBT_PROFILES_DIR = os.getenv("DBT_PROFILES_DIR", "/workspace/pipelines/dbt")
+DBT_PROJECT_DIR = os.getenv("DBT_PROJECT_DIR", "/workspace/infra/dbt")
+DBT_PROFILES_DIR = os.getenv("DBT_PROFILES_DIR", "/workspace/infra/dbt")
 
 TRIGGER_DATASETS = [
     iceberg_dataset("iceberg.silver.fact_attraction_snapshot"),
@@ -61,7 +62,7 @@ Runs dbt models for the Hanoi Tourism Gold layer via astronomer-cosmos:
 
 **Trigger**: When `iceberg.silver.fact_attraction_snapshot` is updated
     """,
-    start_date=days_ago(1),
+    start_date=datetime(2025, 1, 1),
     schedule=TRIGGER_DATASETS,
     catchup=False,
     default_args=default_args,

@@ -7,13 +7,14 @@ Mirrors silver_retail_star_schema_dag.py from vuong.ngo:
   - Iceberg maintenance after each build
 """
 
+from datetime import datetime
 import os
 from typing import Dict
 
 from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.providers.standard.operators.python import PythonOperator
-from airflow.utils.dates import days_ago
+# from airflow.utils.dates import days_ago
 
 from _spark_common import (
     iceberg_dataset,
@@ -99,7 +100,7 @@ Transforms Bronze Google Places data into Silver Kimball-style tables:
 **Trigger**: When `iceberg.bronze.hanoi_attractions` is updated
 **Dependency order**: `dim_attraction` → `fact_attraction_snapshot`
     """,
-    start_date=days_ago(1),
+    start_date=datetime(2025, 1, 1),
     schedule=TRIGGER_DATASETS,
     catchup=False,
     default_args=default_args,

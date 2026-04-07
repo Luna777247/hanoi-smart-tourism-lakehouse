@@ -6,12 +6,12 @@ Schedule: Hàng tuần (Chủ nhật 3:00 AM)
 - dbt: chạy trong container Airflow (venv /opt/airflow/dbt_venv + DBT_PROJECT_DIR).
 - Spark: docker exec spark-master — cần Docker CLI + socket trên worker (xem README).
 """
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
-from airflow.utils.dates import days_ago
+# from airflow.utils.dates import days_ago
 
 default_args = {
     "owner": "tourism-team",
@@ -25,8 +25,8 @@ dag = DAG(
     dag_id="master_hanoi_full_pipeline",
     description="End-to-end: Ingestion + Bronze + Silver + Gold + Quality",
     default_args=default_args,
-    schedule_interval="0 3 * * 0",
-    start_date=days_ago(1),
+    schedule="0 3 * * 0",
+    start_date=datetime(2025, 1, 1),
     catchup=False,
     max_active_runs=1,
     tags=["full-pipeline", "weekly"],
@@ -35,7 +35,7 @@ dag = DAG(
 _DBT_SHELL_PREFIX = r"""
     set -e
     source /opt/airflow/dbt_venv/bin/activate
-    cd "${DBT_PROJECT_DIR:-/workspace/pipelines/dbt}"
+    cd "${DBT_PROJECT_DIR:-/workspace/infra/dbt}"
 """
 
 with dag:
