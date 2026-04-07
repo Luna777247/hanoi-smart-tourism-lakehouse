@@ -30,7 +30,7 @@ def write_snapshot(df: DataFrame, builder: TableBuilder) -> None:
     """
     writer = df.writeTo(builder.table).using("iceberg")
     for column in builder.partition_cols:
-        writer = writer.partitionedBy(F.col(column))
+        writer = writer.partitionedBy(column)
     writer.createOrReplace()
     logger.info("TABLE_WRITTEN | table=%s", builder.table)
 

@@ -1,11 +1,11 @@
 # Sử dụng phiên bản MinIO cụ thể mới nhất để vá lỗ hổng bảo mật
-FROM minio/minio:RELEASE.2024-10-29T16-01-25Z
+FROM minio/minio:latest
 
 # Sao chép mc từ image mới nhất
 FROM minio/mc:latest AS mc-builder
 
 # Tổng hợp các công cụ từ cả hai base images
-FROM minio/minio:RELEASE.2024-10-29T16-01-25Z as final
+FROM minio/minio:latest as final
 COPY --from=mc-builder /usr/bin/mc /usr/bin/mc
 
 # Sao chép config và script

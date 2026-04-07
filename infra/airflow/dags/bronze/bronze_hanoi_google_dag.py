@@ -55,92 +55,9 @@ def validate_env(**context):
     logger.info("Environment validation passed for Google")
     return True
 
-def fetch_weather(**context):
-    """Thu thập dữ liệu thời tiết Hà Nội bổ sung."""
-    import httpx
-    api_key = os.environ.get("OPENWEATHER_API_KEY", "")
-    if not api_key:
-        return {}
-    url = "https://api.openweathermap.org/data/2.5/weather"
-    params = {"q": "Hanoi,VN", "appid": api_key, "units": "metric"}
-    resp = httpx.get(url, params=params, timeout=15)
-    resp.raise_for_status()
-    data = resp.json()
-    weather = {
-        "temperature_celsius": data["main"]["temp"],
-        "weather_condition": data["weather"][0]["main"],
-        "snapshot_time": datetime.utcnow().isoformat(),
-    }
-    context["ti"].xcom_push(key="weather_snapshot", value=weather)
-    return weather
-
-def load_raw_to_minio(**context):
-    """Lưu dữ liệu thời tiết vào bucket raw (JSON)."""
-    from io import BytesIO
-    from minio import Minio
-    ti = context["ti"]
-    weather = ti.xcom_pull(key="weather_snapshot", task_ids="fetch_weather")
-    
-    minio_client = Minio(
-        os.environ["MINIO_ENDPOINT"],
-        access_key=os.environ.get("MINIO_ACCESS_KEY", "minioadmin"),
-        secret_key=os.environ.get("MINIO_SECRET_KEY", "minioadmin123"),
-        secure=False,
-    )
-    date_str = datetime.utcnow().strftime("%Y-%m-%d")
-    ts = datetime.utcnow().strftime("%H%M%S")
-
-    if weather:
-        weather_json = json.dumps([weather], ensure_ascii=False).encode("utf-8")
-        minio_client.put_object(
-            bucket_name="tourism-bronze",
-            object_name=f"source=openweather/date={date_str}/weather_{ts}.json",
-            data=BytesIO(weather_json),
-            length=len(weather_json),
-            content_type="application/json",
-        )
-    return {"status": "success"}
-
-def fetch_google_places_raw(**context):
-    """Giai đoạn 1: Gọi Google Places API và lưu JSON thô vào MinIO."""
-    from io import BytesIO
-    from minio import Minio
-    # backend/ dùng import dạng `app.*` (giống FastAPI); mount repo là /workspace
-    backend_root = os.path.join(
-        os.environ.get("WORKSPACE_ROOT", "/workspace"), "apps", "backend"
-    )
-    if backend_root not in sys.path:
-        sys.path.insert(0, backend_root)
-
-    from app.services.google_places_service import GooglePlacesService
-    
-    api_key = os.environ["GOOGLE_PLACES_API_KEY"]
-    svc = GooglePlacesService(api_key=api_key)
-    
-    # Giả sử chúng ta thu thập mẫu 20 địa điểm mỗi loại để tránh tốn quota trong demo
-    attractions = asyncio.run(svc.fetch_all_hanoi_attractions(limit_per_type=20))
-    logger.info(f"Fetched {len(attractions)} attractions from Google Places API.")
-
-    minio_client = Minio(
-        os.environ["MINIO_ENDPOINT"],
-        access_key=os.environ.get("MINIO_ACCESS_KEY", "minioadmin"),
-        secret_key=os.environ.get("MINIO_SECRET_KEY", "minioadmin123"),
-        secure=False,
-    )
-    date_str = datetime.utcnow().strftime("%Y-%m-%d")
-    ts = datetime.utcnow().strftime("%H%M%S")
-
-    # Upload JSON thô làm Landing Zone
-    places_json = json.dumps(attractions, ensure_ascii=False).encode("utf-8")
-    minio_client.put_object(
-        bucket_name="tourism-bronze",
-        object_name=f"source=google_places/date={date_str}/places_{ts}.json",
-        data=BytesIO(places_json),
-        length=len(places_json),
-        content_type="application/json",
-    )
-    context["ti"].xcom_push(key="raw_path", value=f"source=google_places/date={date_str}/")
-    return len(attractions)
+# Ingestion scripts
+INGESTION_GOOGLE  = os.path.join(spark_job_base(), "ingestion", "fetch_hanoi_google.py")
+INGESTION_WEATHER = os.path.join(spark_job_base(), "ingestion", "fetch_hanoi_weather.py")
 
 # ─── DAG ──────────────────────────────────────────────────────────────────────
 
@@ -162,19 +79,22 @@ with DAG(
         python_callable=validate_env,
     )
 
-    t_fetch_weather = PythonOperator(
+    t_fetch_weather = SparkSubmitOperator(
         task_id="fetch_weather",
-        python_callable=fetch_weather,
+        conn_id="spark_default",
+        application=INGESTION_WEATHER,
+        env_vars=ENV_VARS,
+        conf=BASE_CONF,
+        verbose=True,
     )
 
-    t_fetch_google_raw = PythonOperator(
+    t_fetch_google_raw = SparkSubmitOperator(
         task_id="fetch_google_places_raw",
-        python_callable=fetch_google_places_raw,
-    )
-
-    t_load_weather_raw = PythonOperator(
-        task_id="load_weather_raw_json",
-        python_callable=load_raw_to_minio,
+        conn_id="spark_default",
+        application=INGESTION_GOOGLE,
+        env_vars=ENV_VARS,
+        conf=BASE_CONF,
+        verbose=True,
     )
 
     # Ingest from Raw JSON files using Spark
@@ -204,5 +124,4 @@ with DAG(
 
     start >> t_validate
     t_validate >> [t_fetch_weather, t_fetch_google_raw]
-    t_fetch_weather >> t_load_weather_raw
-    [t_load_weather_raw, t_fetch_google_raw] >> t_ingest_spark >> t_maintenance >> end
+    [t_fetch_weather, t_fetch_google_raw] >> t_ingest_spark >> t_maintenance >> end

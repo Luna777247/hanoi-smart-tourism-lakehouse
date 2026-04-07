@@ -45,38 +45,8 @@ default_args = {
     "retry_delay":     300,  # 5 minutes
 }
 
-def fetch_osm_raw(**context):
-    """Giai đoạn 1: Gọi Overpass API và lưu JSON thô vào MinIO."""
-    from io import BytesIO
-    from minio import Minio
-    backend_root = os.path.join(os.environ.get("WORKSPACE_ROOT", "/workspace"), "apps", "backend")
-    if backend_root not in sys.path:
-        sys.path.insert(0, backend_root)
-
-    from app.services.osm_service import OSMService
-    
-    svc = OSMService()
-    results = asyncio.run(svc.fetch_hanoi_attractions_from_overpass())
-    logger.info(f"Fetched {len(results)} attractions from Overpass API.")
-
-    minio_client = Minio(
-        os.environ["MINIO_ENDPOINT"],
-        access_key=os.environ.get("MINIO_ACCESS_KEY", "minioadmin"),
-        secret_key=os.environ.get("MINIO_SECRET_KEY", "minioadmin123"),
-        secure=False,
-    )
-    date_str = datetime.utcnow().strftime("%Y-%m-%d")
-    ts = datetime.utcnow().strftime("%H%M%S")
-
-    json_data = json.dumps(results, ensure_ascii=False).encode("utf-8")
-    minio_client.put_object(
-        bucket_name="tourism-bronze",
-        object_name=f"source=osm/date={date_str}/attractions_{ts}.json",
-        data=BytesIO(json_data),
-        length=len(json_data),
-        content_type="application/json",
-    )
-    return len(results)
+# Ingestion scripts
+INGESTION_OSM = os.path.join(spark_job_base(), "ingestion", "fetch_hanoi_osm.py")
 
 # ─── DAG ──────────────────────────────────────────────────────────────────────
 
@@ -98,9 +68,13 @@ with DAG(
 ) as dag:
 
     # ── Task 1: API to Landing JSON ──────────────
-    fetch_raw = PythonOperator(
+    fetch_raw = SparkSubmitOperator(
         task_id="fetch_osm_raw",
-        python_callable=fetch_osm_raw,
+        conn_id="spark_default",
+        application=INGESTION_OSM,
+        env_vars=ENV_VARS,
+        conf=BASE_CONF,
+        verbose=True,
     )
 
     # ── Task 2: Ingest from Landing JSON → Bronze Iceberg ────────────────

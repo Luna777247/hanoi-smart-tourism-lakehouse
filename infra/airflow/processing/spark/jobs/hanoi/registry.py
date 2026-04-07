@@ -39,7 +39,7 @@ TABLE_BUILDERS: Sequence[TableBuilder] = (
         table="iceberg.silver.fact_attraction_snapshot",
         build_fn=build_fact_attraction_snapshot,
         primary_key=("snapshot_sk",),
-        partition_cols=("snapshot_date",),
+        partition_cols=("days(snapshot_date)",),
     ),
 )
 

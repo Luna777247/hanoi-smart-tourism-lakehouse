@@ -166,6 +166,6 @@ Chi tiết đầy đủ xem `docker-compose.yml` và `.env.example`.
 Khi sửa `pipelines/airflow/requirements.txt` hoặc `pipelines/airflow/Dockerfile`, build lại các service Airflow:
 
 ```bash
-docker compose build airflow-apiserver airflow-scheduler airflow-worker airflow-triggerer airflow-dag-processor airflow-init
+docker compose build airflow-webserver airflow-scheduler airflow-worker airflow-triggerer airflow-dag-processor airflow-init
 docker compose up -d
 ```

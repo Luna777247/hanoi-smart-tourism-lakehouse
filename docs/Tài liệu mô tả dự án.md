@@ -90,9 +90,15 @@ Hệ thống áp dụng chiến lược **Hybrid Ingestion** (Lai ghép) nhằm 
 *   **Phân tích xu hướng chất lượng (Trend Analysis):** Theo dõi sự biến động của chỉ số rating và số lượng review theo thời gian để đánh giá sức hút và chất lượng dịch vụ của từng điểm đến hoặc khu vực du lịch.
 
 ### 5.4. Data Governance & Quality (Quản trị tin cậy)
-*   **Data Lineage (Truy vết nguồn gốc):** Tận dụng OpenMetadata để hiển thị sơ đồ đường đi của dữ liệu từ nguồn API thô (Bronze) xuyên suốt qua các lớp xử lý đến các bảng báo cáo cuối cùng, giúp dễ dàng cô lập và xử lý lỗi.
-*   **Data Quality Automation:** Tích hợp Great Expectations vào pipeline xử lý để tự động kiểm định chất lượng dữ liệu (data validation) theo các bộ quy tắc định sẵn (ví dụ: rating 1-5, GPS hợp lệ), đảm bảo dữ liệu trên dashboard luôn tin cậy.
+*   **Data Lineage (Truy vết nguồn gốc):** Tận dụng OpenMetadata để hiển thị sơ đồ đường đi của dữ liệu từ nguồn API thô (Bronze) xuyên suốt qua các lớp xử lý đến các bảng báo cáo cuối cùng. Hệ thống đã **tích hợp OpenLineage Spark Listener trực tiếp vào cấu hình lõi**, tự động hóa 100% quá trình bắt tín hiệu và vẽ phả hệ (mạng nhện luồng dữ liệu) mà không cần code theo dõi riêng trong từng cụm Job.
+*   **Data Quality Automation:** Thiết lập kiểm soát gắt gao chất lượng ở 2 chốt chặn: 
+    *   *Tầng Silver (Spark):* Áp dụng các bộ lọc chặn đứng dữ liệu ngoại lai thô bạo (như tọa độ GPS bị lệch ra khỏi giới hạn thủ đô Hà Nội, hoặc rating bị ghi nhận âm).
+    *   *Tầng Gold (dbt):* Khai báo chặt chẽ hệ thống `dbt tests` (unique, not_null, accepted_range) trong `schema.yml` để từ chối các Record hỏng logic ID.
 *   **Centralized Metadata Catalog:** Cung cấp kho từ điển dữ liệu (Data Dictionary) giúp người dùng business hiểu rõ ý nghĩa của từng chỉ số và trường thông tin trong hệ thống.
+
+### 5.5. Tối ưu hoá Lưu trữ Lakehouse (Iceberg Performance Tuning)
+*   **Chiến lược Phân mảnh (Partitioning):** Dữ liệu chuỗi thời gian (Fact snapshot của đánh giá/review) được hệ thống tự động phân mảnh (partition) cực nhanh qua hàm native `days(snapshot_date)` của Iceberg. Việc này ép Data Engine bỏ qua các khu vực rác, giảm lượng scan data dư thừa khi phân tích biểu đồ biến động theo năm/tháng.
+*   **Tự động dọn rác (Compaction/Small Files Tuning):** Triển khai một DAG độc lập với tên `master_iceberg_compaction` chạy nền định kỳ mỗi Chủ nhật. Nhiệm vụ của nó là thực thi hệ lệnh `CALL catalog.system.rewrite_data_files()` tự động quét MinIO và nối hàng loạt file Parquet mỏng lẻ tẻ thành các phân khu tệp tin lớn, duy trì sức mạnh thực thi cao nhất cho Trino/Superset.
 
 ## 6. Luồng dữ liệu tổng thể (Main Workflow)
 1. **Ingest (Landing & Bronze)**:

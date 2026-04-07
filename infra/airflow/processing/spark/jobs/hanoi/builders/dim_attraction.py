@@ -28,6 +28,11 @@ def build_dim_attraction(spark: SparkSession, _: DataFrame | None) -> DataFrame:
     latest = (
         bronze
         .filter(F.col("place_id").isNotNull())
+        # --- Data Quality Checks ---
+        .filter((F.col("lat") >= 20.5) & (F.col("lat") <= 21.5))
+        .filter((F.col("lng") >= 105.3) & (F.col("lng") <= 106.0))
+        .filter((F.col("rating").isNull()) | ((F.col("rating") >= 0) & (F.col("rating") <= 5)))
+        # ---------------------------
         .withColumn("_rn", F.row_number().over(w_latest))
         .filter(F.col("_rn") == 1)
         .drop("_rn")

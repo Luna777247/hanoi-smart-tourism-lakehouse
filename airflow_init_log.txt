@@ -1,0 +1,1229 @@
+﻿docker : /home/airflow/.local/lib/python3.12/site-packages/airfl
+ow/configuration.py:859 DeprecationWarning: The secret_key 
+option in [webserver] has been moved to the secret_key option 
+in [api] - the old setting has been used, but please update 
+your config.
+At line:1 char:1
++ docker logs hanoi-smart-tourism-lakehouse-airflow-init-1 2>&1 
+| Out-F ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (/home/airflow/.... 
+   te your config.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[2026-04-06T14:38:30.113+0000] {configuration.py:1077} WARNING - section/key [openlineage/namespace] not found in config
+[2026-04-06T14:38:35.590+0000] {plugins_manager.py:262} ERROR - Failed to import plugin cosmos
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/plugins_manager.py", line 258, in load_entrypoint_plugins
+    plugin_instance = plugin_class()
+                      ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 267, in __init__
+    ensure_airflow_version_supported()
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 30, in ensure_airflow_version_supported
+    raise RuntimeError(
+RuntimeError: Cosmos AF3 plugin requires Airflow >= 3.1. External views are unavailable on earlier versions.
+[2026-04-06T14:38:36.443+0000] {cli_action_loggers.py:155} WARNING - Failed to log action (psycopg2.OperationalError) connection to server at "postgres" (172.18.0.20), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+DB: postgresql+psycopg2://admin:***@postgres/metastore
+Performing upgrade to the metadata database postgresql+psycopg2://admin:***@postgres/metastore
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "postgres" 
+(172.18.0.20), port 5432 failed: FATAL:  password 
+authentication failed for user "admin"
+
+
+The above exception was the direct cause of the following 
+exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/bin/airflow", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/__main__.py", line 55, in main
+    args.func(args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/cli/cli_config.py", line 48, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/cli.py", line 112, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/providers_configuration_loader.py", line 55, in 
+wrapped_function
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/cli/commands/db_command.py", line 207, in migratedb
+    run_db_migrate_command(args, db.upgradedb, 
+_REVISION_HEADS_MAP)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/cli/commands/db_command.py", line 135, in 
+run_db_migrate_command
+    command(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/session.py", line 101, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 1128, in upgradedb
+    if not _get_current_revision(session=session):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 791, in _get_current_revision
+    conn = session.connection()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/orm/session.py", line 1545, in connection
+    return self._connection_for_bind(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/orm/session.py", line 1555, in _connection_for_bind
+    return self._transaction._connection_for_bind(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/orm/session.py", line 750, in _connection_for_bind
+    conn = bind.connect()
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/future/engine.py", line 412, in connect
+    return super(Engine, self).connect()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, 
+close_with_result=close_with_result)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, 
+_connection)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 2208, in 
+_handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-04-06T14:38:39.966+0000] {configuration.py:1077} WARNING - section/key [openlineage/namespace] not found in config
+[2026-04-06T14:38:40.902+0000] {plugins_manager.py:262} ERROR - Failed to import plugin cosmos
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/plugins_manager.py", line 258, in load_entrypoint_plugins
+    plugin_instance = plugin_class()
+                      ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 267, in __init__
+    ensure_airflow_version_supported()
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 30, in ensure_airflow_version_supported
+    raise RuntimeError(
+RuntimeError: Cosmos AF3 plugin requires Airflow >= 3.1. External views are unavailable on earlier versions.
+[2026-04-06T14:38:41.069+0000] {cli_action_loggers.py:155} WARNING - Failed to log action (psycopg2.OperationalError) connection to server at "postgres" (172.18.0.20), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) 
+connection to server at "postgres" (172.18.0.20), port 5432 
+failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+/home/airflow/.local/lib/python3.12/site-packages/airflow/config
+uration.py:859 DeprecationWarning: The secret_key option in 
+[webserver] has been moved to the secret_key option in [api] - 
+the old setting has been used, but please update your config.
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "postgres" 
+(172.18.0.20), port 5432 failed: FATAL:  password 
+authentication failed for user "admin"
+
+
+The above exception was the direct cause of the following 
+exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/bin/airflow", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/__main__.py", line 55, in main
+    args.func(args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/cli/cli_config.py", line 48, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/cli.py", line 110, in wrapper
+    check_and_run_migrations()
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 849, in check_and_run_migrations
+    with _configured_alembic_environment() as env:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 137, in 
+__enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 836, in _configured_alembic_environment
+    settings.engine.connect() as connection,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/future/engine.py", line 412, in connect
+    return super(Engine, self).connect()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, 
+close_with_result=close_with_result)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, 
+_connection)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 2208, in 
+_handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) 
+connection to server at "postgres" (172.18.0.20), port 5432 
+failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+/home/airflow/.local/lib/python3.12/site-packages/airflow/config
+uration.py:859 DeprecationWarning: The secret_key option in 
+[webserver] has been moved to the secret_key option in [api] - 
+the old setting has been used, but please update your config.
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+[2026-04-06T14:38:44.080+0000] {configuration.py:1077} WARNING - section/key [openlineage/namespace] not found in config
+[2026-04-06T14:38:44.996+0000] {plugins_manager.py:262} ERROR - Failed to import plugin cosmos
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/plugins_manager.py", line 258, in load_entrypoint_plugins
+    plugin_instance = plugin_class()
+                      ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 267, in __init__
+    ensure_airflow_version_supported()
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 30, in ensure_airflow_version_supported
+    raise RuntimeError(
+RuntimeError: Cosmos AF3 plugin requires Airflow >= 3.1. External views are unavailable on earlier versions.
+[2026-04-06T14:38:45.186+0000] {cli_action_loggers.py:155} WARNING - Failed to log action (psycopg2.OperationalError) connection to server at "postgres" (172.18.0.20), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "postgres" 
+(172.18.0.20), port 5432 failed: FATAL:  password 
+authentication failed for user "admin"
+
+
+The above exception was the direct cause of the following 
+exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/bin/airflow", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/__main__.py", line 55, in main
+    args.func(args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/cli/cli_config.py", line 48, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/cli.py", line 110, in wrapper
+    check_and_run_migrations()
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 849, in check_and_run_migrations
+    with _configured_alembic_environment() as env:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 137, in 
+__enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 836, in _configured_alembic_environment
+    settings.engine.connect() as connection,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/future/engine.py", line 412, in connect
+    return super(Engine, self).connect()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, 
+close_with_result=close_with_result)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, 
+_connection)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 2208, in 
+_handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) 
+connection to server at "postgres" (172.18.0.20), port 5432 
+failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+/home/airflow/.local/lib/python3.12/site-packages/airflow/config
+uration.py:859 DeprecationWarning: The secret_key option in 
+[webserver] has been moved to the secret_key option in [api] - 
+the old setting has been used, but please update your config.
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+[2026-04-06T14:38:47.840+0000] {configuration.py:1077} WARNING - section/key [openlineage/namespace] not found in config
+[2026-04-06T14:38:48.712+0000] {plugins_manager.py:262} ERROR - Failed to import plugin cosmos
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/plugins_manager.py", line 258, in load_entrypoint_plugins
+    plugin_instance = plugin_class()
+                      ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 267, in __init__
+    ensure_airflow_version_supported()
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 30, in ensure_airflow_version_supported
+    raise RuntimeError(
+RuntimeError: Cosmos AF3 plugin requires Airflow >= 3.1. External views are unavailable on earlier versions.
+[2026-04-06T14:38:48.885+0000] {cli_action_loggers.py:155} WARNING - Failed to log action (psycopg2.OperationalError) connection to server at "postgres" (172.18.0.20), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2026-04-06T14:38:52.408+0000] {configuration.py:1077} WARNING - section/key [openlineage/namespace] not found in config
+[2026-04-06T14:38:53.428+0000] {plugins_manager.py:262} ERROR - Failed to import plugin cosmos
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/plugins_manager.py", line 258, in load_entrypoint_plugins
+    plugin_instance = plugin_class()
+                      ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 267, in __init__
+    ensure_airflow_version_supported()
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 30, in ensure_airflow_version_supported
+    raise RuntimeError(
+RuntimeError: Cosmos AF3 plugin requires Airflow >= 3.1. External views are unavailable on earlier versions.
+[2026-04-06T14:38:53.644+0000] {cli_action_loggers.py:155} WARNING - Failed to log action (psycopg2.OperationalError) connection to server at "postgres" (172.18.0.20), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "postgres" 
+(172.18.0.20), port 5432 failed: FATAL:  password 
+authentication failed for user "admin"
+
+
+The above exception was the direct cause of the following 
+exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/bin/airflow", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/__main__.py", line 55, in main
+    args.func(args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/cli/cli_config.py", line 48, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/cli.py", line 110, in wrapper
+    check_and_run_migrations()
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 849, in check_and_run_migrations
+    with _configured_alembic_environment() as env:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 137, in 
+__enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 836, in _configured_alembic_environment
+    settings.engine.connect() as connection,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/future/engine.py", line 412, in connect
+    return super(Engine, self).connect()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, 
+close_with_result=close_with_result)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, 
+_connection)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 2208, in 
+_handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+[2026-04-06T14:38:56.418+0000] {configuration.py:1077} WARNING - section/key [openlineage/namespace] not found in config
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) 
+connection to server at "postgres" (172.18.0.20), port 5432 
+failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+/home/airflow/.local/lib/python3.12/site-packages/airflow/config
+uration.py:859 DeprecationWarning: The secret_key option in 
+[webserver] has been moved to the secret_key option in [api] - 
+the old setting has been used, but please update your config.
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+[2026-04-06T14:38:57.285+0000] {plugins_manager.py:262} ERROR - Failed to import plugin cosmos
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/plugins_manager.py", line 258, in load_entrypoint_plugins
+    plugin_instance = plugin_class()
+                      ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 267, in __init__
+    ensure_airflow_version_supported()
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 30, in ensure_airflow_version_supported
+    raise RuntimeError(
+RuntimeError: Cosmos AF3 plugin requires Airflow >= 3.1. External views are unavailable on earlier versions.
+[2026-04-06T14:38:57.440+0000] {cli_action_loggers.py:155} WARNING - Failed to log action (psycopg2.OperationalError) connection to server at "postgres" (172.18.0.20), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "postgres" 
+(172.18.0.20), port 5432 failed: FATAL:  password 
+authentication failed for user "admin"
+
+
+The above exception was the direct cause of the following 
+exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/bin/airflow", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/__main__.py", line 55, in main
+    args.func(args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/cli/cli_config.py", line 48, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/cli.py", line 110, in wrapper
+    check_and_run_migrations()
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 849, in check_and_run_migrations
+    with _configured_alembic_environment() as env:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 137, in 
+__enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflo
+w/utils/db.py", line 836, in _configured_alembic_environment
+    settings.engine.connect() as connection,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/future/engine.py", line 412, in connect
+    return super(Engine, self).connect()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, 
+close_with_result=close_with_result)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, 
+_connection)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 2208, in 
+_handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = 
+pool._invoke_creator(self)
+                                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/create.py", line 574, in connect
+[2026-04-06T14:39:00.018+0000] {configuration.py:1077} WARNING - section/key [openlineage/namespace] not found in config
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalc
+hemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycop
+g2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, 
+**kwasync)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) 
+connection to server at "postgres" (172.18.0.20), port 5432 
+failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+/home/airflow/.local/lib/python3.12/site-packages/airflow/config
+uration.py:859 DeprecationWarning: The secret_key option in 
+[webserver] has been moved to the secret_key option in [api] - 
+the old setting has been used, but please update your config.
+
+airflow connections add command error: argument --conn-port: 
+expected one argument, see help above.
+[2026-04-06T14:39:00.938+0000] {plugins_manager.py:262} ERROR - Failed to import plugin cosmos
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/plugins_manager.py", line 258, in load_entrypoint_plugins
+    plugin_instance = plugin_class()
+                      ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 267, in __init__
+    ensure_airflow_version_supported()
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 30, in ensure_airflow_version_supported
+    raise RuntimeError(
+RuntimeError: Cosmos AF3 plugin requires Airflow >= 3.1. External views are unavailable on earlier versions.
+[2026-04-06T14:39:01.133+0000] {cli_action_loggers.py:155} WARNING - Failed to log action (psycopg2.OperationalError) connection to server at "postgres" (172.18.0.20), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2026-04-06T14:39:04.221+0000] {configuration.py:1077} WARNING - section/key [openlineage/namespace] not found in config
+[2026-04-06T14:39:05.141+0000] {plugins_manager.py:262} ERROR - Failed to import plugin cosmos
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/plugins_manager.py", line 258, in load_entrypoint_plugins
+    plugin_instance = plugin_class()
+                      ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 267, in __init__
+    ensure_airflow_version_supported()
+  File "/home/airflow/.local/lib/python3.12/site-packages/cosmos/plugin/airflow3.py", line 30, in ensure_airflow_version_supported
+    raise RuntimeError(
+RuntimeError: Cosmos AF3 plugin requires Airflow >= 3.1. External views are unavailable on earlier versions.
+Usage: airflow connections add [-h] [--conn-description CONN_DESCRIPTION]
+                               [--conn-extra CONN_EXTRA]
+                               [--conn-host CONN_HOST] [--conn-json CONN_JSON]
+                               [--conn-login CONN_LOGIN]
+                               [--conn-password CONN_PASSWORD]
+                               [--conn-port CONN_PORT]
+                               [--conn-schema CONN_SCHEMA]
+                               [--conn-type CONN_TYPE] [--conn-uri CONN_URI]
+                               conn_id
+
+Add a connection
+
+Positional Arguments:
+  conn_id               Connection id, required to get/add/delete/test a connection
+
+Options:
+  -h, --help            show this help message and exit
+  --conn-description CONN_DESCRIPTION
+                        Connection description, optional when adding a connection
+  --conn-extra CONN_EXTRA
+                        Connection `Extra` field, optional when adding a connection
+  --conn-host CONN_HOST
+                        Connection host, optional when adding a connection
+  --conn-json CONN_JSON
+                        Connection JSON, required to add a connection using JSON representation
+  --conn-login CONN_LOGIN
+                        Connection login, optional when adding a connection
+  --conn-password CONN_PASSWORD
+                        Connection password, optional when adding a connection
+  --conn-port CONN_PORT
+                        Connection port, optional when adding a connection
+  --conn-schema CONN_SCHEMA
+                        Connection schema, optional when adding a connection
+  --conn-type CONN_TYPE
+                        Connection type, required to add a connection without conn_uri
+  --conn-uri CONN_URI   Connection URI, required to add a connection without conn_type

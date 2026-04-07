@@ -15,7 +15,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__API_AUTH__JWT_SECRET_KEY: ${AIRFLOW__API_AUTH__JWT_SECRET_KEY} # .env fallback
     AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET_KEY} # .env fallback
     AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW_API_SECRET_KEY} # .env fallback
-    AIRFLOW__WEBSERVER__BASE_URL: ${AIRFLOW__WEBSERVER__BASE_URL}
+    AIRFLOW__WEBSERVER__BASE_URL: ${AIRFLOW__WEBSERVER__BASE_URL:-http://localhost:8080}
     AIRFLOW_CONFIG: "/opt/airflow/config/airflow.cfg"
     MINIO_ROOT_USER: ${MINIO_ROOT_USER} # .env fallback; overridden by Vault
     MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD} # .env fallback; overridden by Vault
@@ -29,6 +29,13 @@ x-airflow-common: &airflow-common
     # Phase 3: replace VAULT_TOKEN with AppRole secret-id
     VAULT_ADDR: "http://vault:8200"
     VAULT_TOKEN: "dev-root-token"
+    # External APIs
+    GOOGLE_PLACES_API_KEY: ${GOOGLE_PLACES_API_KEY}
+    SERPAPI_KEY: ${SERPAPI_KEY}
+    OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY}
+    HANOI_LAT: ${HANOI_LAT:-21.0285}
+    HANOI_LON: ${HANOI_LON:-105.8542}
+    HANOI_RADIUS_METERS: ${HANOI_RADIUS_METERS:-10000}
   # vault-entrypoint.sh fetches secrets then exec's the real Airflow process
   entrypoint: [ "bash", "/vault-entrypoint.sh", "/usr/bin/dumb-init", "--", "/entrypoint" ]
   volumes:
@@ -54,8 +61,8 @@ services:
       context: ./infra/minio
     command: server /data --console-address ":9001"
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - "${MINIO_API_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER} # .env fallback; overridden by Vault at startup
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD} # .env fallback; overridden by Vault
@@ -119,7 +126,7 @@ services:
     build:
       context: ./infra/trino
     ports:
-      - "8080:8080"
+      - "${TRINO_UI_PORT:-8080}:8080"
     volumes:
       - trino-data:/var/trino/data
     user: "0:0"
@@ -465,7 +472,7 @@ services:
       schema-registry:
         condition: service_healthy
     ports:
-      - "8082:8080"
+      - "${KAFKA_UI_PORT:-8082}:8080"
     deploy:
       resources:
         limits:
@@ -490,7 +497,7 @@ services:
       - AWS_JAVA_V1_DISABLE_DEPRECATION_ANNOUNCEMENT=true
     ports:
       - "7077:7077"
-      - "8088:8080"
+      - "${SPARK_MASTER_UI_PORT:-8088}:8080"
       - "4040:4040"
     extra_hosts:
       - "localhost:host-gateway"
@@ -806,7 +813,7 @@ services:
     <<: *airflow-common
     command: api-server -w 1
     ports:
-      - "8085:8080"
+      - "${AIRFLOW_UI_PORT:-8085}:8080"
     healthcheck:
       test: [ "CMD", "curl", "--fail", "http://localhost:8080/airflow/api/v2/version" ]
       interval: 30s
@@ -977,14 +984,19 @@ services:
           --conn-port 7077 \
           --conn-extra '{"master":"spark://spark-master:7077","deploy_mode":"client","spark_binary":"/opt/spark/bin/spark-submit","conf":{},"env_vars":{}}'
 
-        airflow connections delete 'oracle_default' 2>/dev/null || true
-        airflow connections add 'oracle_default' \
-            --conn-type 'oracle' \
-            --conn-host '${ORACLE_HOST}' \
-            --conn-port ${ORACLE_PORT} \
-            --conn-login '${ORACLE_USER}' \
-            --conn-password '${ORACLE_PASSWORD}' \
-            --conn-schema '${ORACLE_SERVICE_NAME}'
+        # Oracle connection — chỉ tạo khi biến ORACLE_HOST đã được cấu hình
+        if [[ -n "${ORACLE_HOST}" ]]; then
+          airflow connections delete 'oracle_default' 2>/dev/null || true
+          airflow connections add 'oracle_default' \
+              --conn-type 'oracle' \
+              --conn-host "${ORACLE_HOST}" \
+              --conn-port "${ORACLE_PORT}" \
+              --conn-login "${ORACLE_USER}" \
+              --conn-password "${ORACLE_PASSWORD}" \
+              --conn-schema "${ORACLE_SERVICE_NAME}"
+        else
+          echo "⚠️  ORACLE_HOST chưa được cấu hình, bỏ qua oracle_default connection."
+        fi
     environment:
       <<: *airflow-common-env
     user: "0:0"
@@ -1012,7 +1024,7 @@ services:
       - VAULT_ADDR=http://vault:8200
       - VAULT_TOKEN=dev-root-token
     ports:
-      - "8089:8088"
+      - "${SUPERSET_PORT:-8089}:8088"
     volumes:
       - ./infra/superset/superset_config_keycloak.py:/app/pythonpath/superset_config_keycloak.py
       - ./infra/superset/provisioning:/app/provisioning
@@ -1292,7 +1304,7 @@ services:
     restart: unless-stopped
 
     ports:
-      - "18084:8080"
+      - "${KEYCLOAK_PORT:-18084}:8080"
 
     environment:
       KEYCLOAK_ADMIN: admin
@@ -1601,68 +1613,68 @@ services:
           memory: 128M
     profiles: [ flink ]
 
-#  ranger-admin:
-#    build:
-#      context: ./infra/ranger-admin
-#    container_name: ranger-admin
-#    hostname: ranger-admin
-#    environment:
-#      KEYCLOAK_URL: http://keycloak:8080
-#      KEYCLOAK_REALM: data-platform
-#      KEYCLOAK_CLIENT_ID: ranger-admin-api
-#      KEYCLOAK_ADMIN_API_SECRET: ${KEYCLOAK_ADMIN_API_SECRET:-ranger-admin-api-secret-local} # .env fallback; overridden by Vault
-#      RANGER_URL: http://localhost:6080
-#      RANGER_ADMIN_USER: admin
-#      RANGER_ADMIN_PASS: ${RANGER_ADMIN_PASS:-Rangeradmin1} # .env fallback; overridden by Vault
-#      RANGER_OAUTH2_SECRET: ${RANGER_OAUTH2_SECRET:-CHANGE_ME_RANGER_SECRET} # .env fallback; overridden by Vault
-#      SYNC_INTERVAL_SECONDS: 300
-#      # Vault — docker-entrypoint.sh vault_fetch overrides credentials above
-#      # Phase 3: replace VAULT_TOKEN with AppRole secret-id
-#      VAULT_ADDR: "http://vault:8200"
-#      VAULT_TOKEN: "dev-root-token"
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: "1.00"
-#          memory: 2G
-#        reservations:
-#          cpus: "0.50"
-#          memory: 1G
-#    ports:
-#      - 6080:6080
-#    depends_on:
-#      postgres:
-#        condition: service_healthy
-#      hive-metastore:
-#        condition: service_healthy
-#    profiles: [ ranger ]
-#
-#  ranger-usersync:
-#    build:
-#      context: ./infra/ranger-admin/ranger-usersync
-#    container_name: ranger-usersync
-#    restart: "no"
-#    environment:
-#      KEYCLOAK_ADMIN: admin
-#      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin123} # .env fallback; overridden by Vault
-#      KEYCLOAK_URL: http://keycloak:8080
-#      KEYCLOAK_REALM: data-platform
-#      KEYCLOAK_ADMIN_API_SECRET: ${KEYCLOAK_ADMIN_API_SECRET:-ranger-admin-api-secret-local} # .env fallback; overridden by Vault
-#      RANGER_URL: http://ranger-admin:6080
-#      RANGER_ADMIN_USER: admin
-#      RANGER_ADMIN_PASS: ${RANGER_ADMIN_PASS:-Rangeradmin1} # .env fallback; overridden by Vault
-#      # Vault — vault-entrypoint.sh overrides credentials above
-#      # Phase 3: replace VAULT_TOKEN with AppRole secret-id
-#      VAULT_ADDR: "http://vault:8200"
-#      VAULT_TOKEN: "dev-root-token"
-#    depends_on:
-#      keycloak:
-#        condition: service_healthy
-#      ranger-admin:
-#        condition: service_healthy
-#    networks:
-#      - default
-#    profiles: [ ranger ]
+  #  ranger-admin:
+  #    build:
+  #      context: ./infra/ranger-admin
+  #    container_name: ranger-admin
+  #    hostname: ranger-admin
+  #    environment:
+  #      KEYCLOAK_URL: http://keycloak:8080
+  #      KEYCLOAK_REALM: data-platform
+  #      KEYCLOAK_CLIENT_ID: ranger-admin-api
+  #      KEYCLOAK_ADMIN_API_SECRET: ${KEYCLOAK_ADMIN_API_SECRET:-ranger-admin-api-secret-local} # .env fallback; overridden by Vault
+  #      RANGER_URL: http://localhost:6080
+  #      RANGER_ADMIN_USER: admin
+  #      RANGER_ADMIN_PASS: ${RANGER_ADMIN_PASS:-Rangeradmin1} # .env fallback; overridden by Vault
+  #      RANGER_OAUTH2_SECRET: ${RANGER_OAUTH2_SECRET:-CHANGE_ME_RANGER_SECRET} # .env fallback; overridden by Vault
+  #      SYNC_INTERVAL_SECONDS: 300
+  #      # Vault — docker-entrypoint.sh vault_fetch overrides credentials above
+  #      # Phase 3: replace VAULT_TOKEN with AppRole secret-id
+  #      VAULT_ADDR: "http://vault:8200"
+  #      VAULT_TOKEN: "dev-root-token"
+  #    deploy:
+  #      resources:
+  #        limits:
+  #          cpus: "1.00"
+  #          memory: 2G
+  #        reservations:
+  #          cpus: "0.50"
+  #          memory: 1G
+  #    ports:
+  #      - 6080:6080
+  #    depends_on:
+  #      postgres:
+  #        condition: service_healthy
+  #      hive-metastore:
+  #        condition: service_healthy
+  #    profiles: [ ranger ]
+  #
+  #  ranger-usersync:
+  #    build:
+  #      context: ./infra/ranger-admin/ranger-usersync
+  #    container_name: ranger-usersync
+  #    restart: "no"
+  #    environment:
+  #      KEYCLOAK_ADMIN: admin
+  #      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin123} # .env fallback; overridden by Vault
+  #      KEYCLOAK_URL: http://keycloak:8080
+  #      KEYCLOAK_REALM: data-platform
+  #      KEYCLOAK_ADMIN_API_SECRET: ${KEYCLOAK_ADMIN_API_SECRET:-ranger-admin-api-secret-local} # .env fallback; overridden by Vault
+  #      RANGER_URL: http://ranger-admin:6080
+  #      RANGER_ADMIN_USER: admin
+  #      RANGER_ADMIN_PASS: ${RANGER_ADMIN_PASS:-Rangeradmin1} # .env fallback; overridden by Vault
+  #      # Vault — vault-entrypoint.sh overrides credentials above
+  #      # Phase 3: replace VAULT_TOKEN with AppRole secret-id
+  #      VAULT_ADDR: "http://vault:8200"
+  #      VAULT_TOKEN: "dev-root-token"
+  #    depends_on:
+  #      keycloak:
+  #        condition: service_healthy
+  #      ranger-admin:
+  #        condition: service_healthy
+  #    networks:
+  #      - default
+  #    profiles: [ ranger ]
 
   elasticsearch:
     build:
@@ -1681,8 +1693,8 @@ services:
       retries: 3
       start_period: 60s
     ports:
-      - ${ELASTICSEARCH_HTTP_PORT:-9200}:9200
-      - ${ELASTICSEARCH_TRANSPORT_PORT:-9300}:9300
+      - "${ELASTICSEARCH_HTTP_PORT:-9200}:9200"
+      - "${ELASTICSEARCH_TRANSPORT_PORT:-9300}:9300"
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     deploy:
@@ -1863,7 +1875,7 @@ services:
       # Reduce JVM heap to avoid OOM on low-memory hosts. Increase if your machine has >4GB free for Docker.
       - JAVA_OPTS=-Xms512m -Xmx768m
     ports:
-      - ${DATAHUB_MAPPED_GMS_PORT:-8097}:8080
+      - "${DATAHUB_GMS_PORT:-8097}:8080"
     volumes:
       - ${HOME}/.datahub/plugins:/etc/datahub/plugins
     restart: unless-stopped
@@ -2092,7 +2104,7 @@ services:
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
     ports:
-      - "9094:9090"
+      - "${PROMETHEUS_PORT:-9094}:9090"
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9094/-/healthy" ]
       interval: 30s
@@ -2107,7 +2119,7 @@ services:
     user: "0"
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "${GRAFANA_PORT:-3000}:3000"
     environment:
       - GF_INSTALL_PLUGINS=vertamedia-clickhouse-datasource
     volumes:
@@ -2132,7 +2144,7 @@ services:
     command:
       - "--config.file=/etc/loki/loki-config.yml"
     ports:
-      - "3100:3100"
+      - "${LOKI_PORT:-3101}:3100"
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3100/ready" ]
       interval: 30s
@@ -2669,9 +2681,10 @@ services:
       AIRFLOW__API__AUTH_BACKENDS: "airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session"
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__OPENMETADATA_AIRFLOW_APIS__DAG_GENERATED_CONFIGS: "/opt/airflow/dag_generated_configs"
+      AIRFLOW__WEBSERVER__BASE_URL: ${AIRFLOW_WEBSERVER_BASE_URL:-http://localhost:8087}
       DB_HOST: ${AIRFLOW_DB_HOST:-postgres}
       DB_PORT: ${AIRFLOW_DB_PORT:-5432}
-      AIRFLOW_DB: ${AIRFLOW_DB:-airflow_db}
+      AIRFLOW_HOST: ${AIRFLOW_HOST:-airflow-apiserver}
       DB_USER: ${AIRFLOW_DB_USER:-airflow_user}
       DB_SCHEME: ${AIRFLOW_DB_SCHEME:-postgresql+psycopg2}
       DB_PASSWORD: ${AIRFLOW_DB_PASSWORD:-airflow_pass}
@@ -2691,7 +2704,7 @@ services:
     expose:
       - 8080
     ports:
-      - "${AIRFLOW_UI_PORT:-8087}:8080"
+      - "${AIRFLOW_INGESTION_PORT:-8087}:8080"
     networks:
       - default
     volumes:
@@ -2712,7 +2725,7 @@ services:
     container_name: lakehouse-portal
     restart: unless-stopped
     ports:
-      - "${PORTAL_PORT:-3100}:80"
+      - "${LAKEHOUSE_PORTAL_PORT:-3100}:80"
     depends_on:
       oauth2-proxy:
         condition: service_started
@@ -2742,7 +2755,7 @@ services:
       OAUTH2_PROXY_EMAIL_DOMAINS: "*"
       OAUTH2_PROXY_COOKIE_DOMAINS: "localhost,127.0.0.1"
       OAUTH2_PROXY_COOKIE_SECURE: "false"
-      OAUTH2_PROXY_UPSTREAMS: "file:///dev/null"
+      OAUTH2_PROXY_UPSTREAMS: "http://airflow-apiserver:8080"
       OAUTH2_PROXY_HTTP_ADDRESS: "0.0.0.0:4180"
       OAUTH2_PROXY_PASS_ACCESS_TOKEN: "true"
       OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER: "true"
