@@ -61,6 +61,8 @@ services:
   minio:
     build:
       context: ./infra/minio
+    image: hanoi-smart-tourism-lakehouse-minio:latest # Ensure it names the built image
+
     command: server /data --console-address ":9001"
     ports:
       - "${MINIO_API_PORT:-9000}:9000"
@@ -358,7 +360,7 @@ services:
     restart: unless-stopped
     networks:
       - default
-    profiles: [ core, datahub, hdfs, travel, son ]
+    profiles: [ extension ]
 
   # Kafka setup cho DataHub topics
   kafka-setup:
@@ -866,10 +868,13 @@ services:
 
   airflow-worker:
     <<: *airflow-common
-    command: celery worker
+    hostname: airflow-worker
+    command: python -m celery --app airflow.providers.celery.executors.celery_executor.app worker --hostname=airflow-worker
     environment:
       <<: *airflow-common-env
       DUMB_INIT_SETSID: "0"
+      HOSTNAME: airflow-worker
+      AIRFLOW__CORE__HOSTNAME: airflow-worker
     healthcheck:
       test:
         - "CMD-SHELL"
@@ -954,36 +959,46 @@ services:
 
   airflow-init:
     <<: *airflow-common
-    # vault-entrypoint.sh fetches secrets, then hands off to /bin/bash -c "..."
-    entrypoint: [ "bash", "/vault-entrypoint.sh", "/bin/bash" ]
+    # vault-entrypoint.sh handles secrets before /entrypoint initializes the Airflow environment
+    # airflow-init inherits the full entrypoint from *airflow-common (with /entrypoint)
+
     command:
+      - bash
       - -c
       - |
-        if [[ -z "${AIRFLOW_UID}" ]]; then
-          export AIRFLOW_UID=$(id -u)
-        fi
-        mkdir -p /opt/airflow/{logs,dags,plugins}
-        chown -R "${AIRFLOW_UID}:0" /opt/airflow/
-        airflow db migrate
-        airflow users create --username ${AIRFLOW_ADMIN_USERNAME} --password ${AIRFLOW_ADMIN_PASSWORD} --firstname ${AIRFLOW_ADMIN_FIRSTNAME} --lastname ${AIRFLOW_ADMIN_LASTNAME} --role Admin --email ${AIRFLOW_ADMIN_EMAIL}
-        airflow connections delete spark_default || true
-        # Xóa connection cũ nếu có
-        airflow connections delete 'minio' 2>/dev/null || true
+        # The Airflow entrypoint handles environment setup (PYTHONPATH, etc.)
+        # so we focus on the database and connections here.
 
-        # Tạo connection mới với cú pháp đúng
+        echo "--- Running Airflow DB migration ---"
+        airflow db migrate
+
+        echo "--- Creating admin user ---"
+        airflow users create \
+          --username "${AIRFLOW_ADMIN_USERNAME:-admin}" \
+          --password "${AIRFLOW_ADMIN_PASSWORD:-admin}" \
+          --firstname "${AIRFLOW_ADMIN_FIRSTNAME:-Admin}" \
+          --lastname "${AIRFLOW_ADMIN_LASTNAME:-User}" \
+          --role Admin \
+          --email "${AIRFLOW_ADMIN_EMAIL:-admin@example.com}" || true
+
+        # --- Spark Connection ---
+        echo "--- Configuring Connections ---"
+        airflow connections delete 'spark_default' 2>/dev/null || true
+        airflow connections add 'spark_default' \
+          --conn-type spark \
+          --conn-host spark-master \
+          --conn-port 7077 \
+          --conn-extra '{"master":"spark://spark-master:7077","deploy_mode":"client","spark_binary":"/opt/spark/bin/spark-submit","conf":{},"env_vars":{}}'
+
+        # --- MinIO Connection ---
+        airflow connections delete 'minio' 2>/dev/null || true
         airflow connections add 'minio' \
             --conn-type 'aws' \
             --conn-login "${MINIO_ROOT_USER}" \
             --conn-password "${MINIO_ROOT_PASSWORD}" \
             --conn-extra "{\"endpoint_url\": \"http://minio:9000\"}"
 
-        airflow connections add spark_default \
-          --conn-type spark \
-          --conn-host spark://spark-master \
-          --conn-port 7077 \
-          --conn-extra '{"master":"spark://spark-master:7077","deploy_mode":"client","spark_binary":"/opt/spark/bin/spark-submit","conf":{},"env_vars":{}}'
-
-        # Oracle connection — chỉ tạo khi biến ORACLE_HOST đã được cấu hình
+        # --- Oracle Connection ---
         if [[ -n "${ORACLE_HOST}" ]]; then
           airflow connections delete 'oracle_default' 2>/dev/null || true
           airflow connections add 'oracle_default' \
@@ -993,12 +1008,14 @@ services:
               --conn-login "${ORACLE_USER}" \
               --conn-password "${ORACLE_PASSWORD}" \
               --conn-schema "${ORACLE_SERVICE_NAME}"
-        else
-          echo "⚠️  ORACLE_HOST chưa được cấu hình, bỏ qua oracle_default connection."
         fi
+
+        echo "--- Airflow Initialization Complete! ---"
+
     environment:
       <<: *airflow-common-env
-    user: "0:0"
+    # User: airflow (inherit from common) instead of root to find the libraries
+    # The entrypoint will handle permissions if AIRFLOW_UID is set correctly in .env
     depends_on:
       redis:
         condition: service_healthy
@@ -1446,7 +1463,7 @@ services:
         reservations:
           cpus: "0.25"
           memory: 512M
-    profiles: [ core ]
+    profiles: [ extension ]
 
   # Streaming - Apache Flink (optional)
   flink-jobmanager:
