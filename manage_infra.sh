@@ -1,34 +1,36 @@
 #!/bin/bash
-
-# --- Hanoi Smart Tourism - Infrastructure Manager ---
-
-# Các nhóm profile đã định nghĩa trong docker-compose.yml:
-# core: MinIO, Postgres, Spark, Redis, Vault, Elasticsearch
-# airflow: Toàn bộ cụm Airflow (Scheduler, Worker, Webserver)
-# travel: Profile tùy chỉnh chứa các công cụ du lịch (Spark, Kafka, Trino)
-# monitoring: Prometheus, Grafana, Loki (Để giám sát hệ thống)
-
-case "$1" in
-  "start-tourism")
-    echo "🚀 Đang khởi động hệ thống Hanoi Smart Tourism Lakehouse..."
-    docker-compose --profile core --profile airflow --profile travel up -d
+# File: manage_infra.sh
+# Cach dung: ./manage_infra.sh [start|stop|restart|logs|status]
+ 
+CMD=${1:-help}
+ 
+case $CMD in
+  start)
+    echo '==> Starting Hanoi Tourism Lakehouse...'
+    docker compose up -d postgres redis minio vault
+    sleep 15
+    docker compose run --rm minio-init
+    bash scripts/setup_vault.sh
+    docker compose run --rm airflow-init
+    docker compose up -d airflow-webserver airflow-scheduler airflow-worker airflow-triggerer
+    docker compose up -d trino superset openmetadata-server
+    docker compose up -d backend frontend
+    bash scripts/health_check.sh
     ;;
-  "start-full")
-    echo "🌟 Đang khởi động TOÀN BỘ hệ thống (Cực kỳ nặng!)..."
-    docker-compose --profile core --profile airflow --profile travel --profile monitoring --profile trino --profile clickhouse up -d
+  stop)
+    docker compose down
     ;;
-  "stop")
-    echo "🛑 Đang dừng toàn bộ hệ thống..."
-    docker-compose down
+  restart)
+    docker compose restart
     ;;
-  "status")
-    docker-compose ps
+  logs)
+    docker compose logs -f --tail=100 ${2:-airflow-webserver}
     ;;
-  "build")
-    echo "🛠️ Đang xây dựng lại các Image..."
-    docker-compose --profile core --profile airflow build
+  status)
+    bash scripts/health_check.sh
     ;;
   *)
-    echo "Sử dụng: ./manage_infra.sh [start-tourism | start-full | stop | status | build]"
+    echo 'Usage: ./manage_infra.sh [start|stop|restart|logs|status]'
     ;;
 esac
+

@@ -1,12 +1,27 @@
 {
-  "name": "frontend",
+  "name": "lakehouse-portal",
   "version": "1.0.0",
-  "description": "Sample frontend placeholder",
-  "main": "index.js",
   "scripts": {
-    "start": "echo 'No frontend app yet' && sleep 3600",
-    "build": "echo 'No build step'"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "@tanstack/react-query": "^5.0.0",
+    "axios": "^1.6.0",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.400.0",
+    "next": "^16.2.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^2.10.0",
+    "tailwind-merge": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "25.5.2",
+    "@types/react": "^19.0.0",
+    "autoprefixer": "^10.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.0.0"
+  }
 }

@@ -1,0 +1,58 @@
+
+services:
+  # ─── Kafka (KRaft mode) ───────────────────────────────
+  kafka:
+    image: bitnami/kafka:3.7
+    container_name: lakehouse-kafka
+    profiles: [travel]
+    environment:
+      KAFKA_CFG_NODE_ID: ${KAFKA_NODE_ID:-1}
+      KAFKA_CFG_PROCESS_ROLES: ${KAFKA_PROCESS_ROLES:-broker,controller}
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_LISTENERS: ${KAFKA_LISTENERS:-PLAINTEXT://:9092,CONTROLLER://:9093}
+      KAFKA_CFG_ADVERTISED_LISTENERS: ${KAFKA_ADVERTISED_LISTENERS:-PLAINTEXT://kafka:9092}
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: ${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP:-CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT}
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: ${KAFKA_CONTROLLER_QUORUM_VOTERS:?Set KAFKA_CONTROLLER_QUORUM_VOTERS in .env before starting travel profile}
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: ${KAFKA_AUTO_CREATE_TOPICS_ENABLE:-true}
+      KAFKA_KRAFT_CLUSTER_ID: ${KAFKA_KRAFT_CLUSTER_ID:-MkU3OEVBNTcwNTJENDM2Qk}
+      ALLOW_PLAINTEXT_LISTENER: yes
+    ports:
+      - ${KAFKA_EXTERNAL_PORT:-9092}:9092
+    healthcheck:
+      test: ['CMD-SHELL', 'kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1']
+      interval: 15s
+      timeout: 10s
+      retries: 8
+    networks: [lakehouse]
+
+  # ─── Flink ────────────────────────────────────────────
+  flink-jobmanager:
+    image: flink:1.19.1-scala_2.12-java11
+    container_name: lakehouse-flink-jobmanager
+    profiles: [travel]
+    command: jobmanager
+    environment:
+      JOB_MANAGER_RPC_ADDRESS: flink-jobmanager
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: flink-jobmanager
+        rest.port: ${FLINK_REST_PORT:-8081}
+        taskmanager.numberOfTaskSlots: ${FLINK_TASKMANAGER_SLOTS:-2}
+    ports:
+      - ${FLINK_JOBMANAGER_PORT:-8095}:${FLINK_REST_PORT:-8081}
+    depends_on:
+      kafka: { condition: service_healthy }
+    networks: [lakehouse]
+
+  flink-taskmanager:
+    image: flink:1.19.1-scala_2.12-java11
+    container_name: lakehouse-flink-taskmanager
+    profiles: [travel]
+    command: taskmanager
+    environment:
+      JOB_MANAGER_RPC_ADDRESS: flink-jobmanager
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: flink-jobmanager
+        taskmanager.numberOfTaskSlots: ${FLINK_TASKMANAGER_SLOTS:-2}
+    depends_on:
+      flink-jobmanager: { condition: service_started }
+    networks: [lakehouse]

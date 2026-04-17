@@ -1,40 +1,27 @@
-# Builder stage for installing Java and Docker
-FROM debian:bookworm-slim AS builder
+# File: infra/airflow/Dockerfile
+FROM apache/airflow:3.0.0
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    openjdk-17-jre-headless curl tar docker.io && \
+USER root
+# Install git, uv, and Java (required for Spark)
+RUN apt-get update && apt-get install -y git curl openjdk-17-jre-headless && \
+    curl -LsSf https://astral.sh/uv/install.sh | sh && \
+    ln -s /root/.cargo/bin/uv /usr/local/bin/uv && \
     rm -rf /var/lib/apt/lists/*
 
-# Final stage - Airflow 3.1.0
-FROM apache/airflow:3.1.0-python3.12
-
-# Copy Java and Docker from builder
-COPY --from=builder /usr/lib/jvm/java-17-openjdk-amd64 /usr/lib/jvm/java-17-openjdk-amd64
-COPY --from=builder /usr/bin/docker /usr/bin/docker
-
-# Set JAVA_HOME
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-ENV PATH="$JAVA_HOME/bin:$PATH"
-
-# Copy và cài đặt requirements cho Airflow
-COPY requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir \
-    --index-url https://pypi.org/simple/ \
-    --trusted-host pypi.org \
-    --trusted-host files.pythonhosted.org \
-    -r /tmp/requirements.txt
+USER airflow
+COPY --chown=airflow:0 infra/airflow/requirements.txt /requirements.txt
+# Use uv for faster and smarter dependency resolution
+RUN uv pip install --no-cache-dir -r /requirements.txt
 
 USER airflow
 
-# ─── Cài đặt dbt Virtual Environment ───────────
-RUN python3 -m venv /opt/airflow/dbt_venv && \
-    /opt/airflow/dbt_venv/bin/pip install --no-cache-dir \
-        --index-url https://pypi.org/simple/ \
-        --trusted-host pypi.org \
-        --trusted-host files.pythonhosted.org \
-        "dbt-spark[PyHive]" \
-        "dbt-trino" \
-        "astronomer-cosmos>=1.10.6" \
-        "psycopg2-binary" \
-        "asyncpg"
-# ──────────────────────────────────────────────
+# Bake application logic into the image
+COPY --chown=airflow:0 ./infra/airflow/dags /opt/airflow/dags
+COPY --chown=airflow:0 ./dbt_project /opt/airflow/dbt_project
+COPY --chown=airflow:0 ./infra/airflow/plugins /opt/airflow/plugins
+
+# Pre-parse dbt to ensure safety and performance
+WORKDIR /opt/airflow/dbt_project
+RUN dbt parse --profiles-dir . || echo "Warning: dbt parse failed, check your profiles.yml"
+
+WORKDIR /opt/airflow

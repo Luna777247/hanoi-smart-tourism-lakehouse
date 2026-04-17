@@ -1,22 +1,30 @@
-# Airflow Providers (compatible with Airflow 3.x)
-apache-airflow-providers-apache-spark
+# File: infra/airflow/requirements.txt
+# apache-airflow>=3.0.0 (Already in base image)
+apache-airflow-providers-postgres
+apache-airflow-providers-apache-spark~=5.0.0
+apache-airflow-providers-trino
+apache-airflow-providers-http
 apache-airflow-providers-common-sql
-apache-airflow-providers-fab
-
-# OAuth2 support
-authlib
-
-# dbt & Cosmos - phiên bản >= 1.9.0 hỗ trợ Airflow 3.x
-# astronomer-cosmos==1.10.6 yêu cầu Airflow >= 3.1 cho AF3 plugin
-astronomer-cosmos>=1.10.6
-dbt-spark[PyHive]
-dbt-trino
+apache-airflow-providers-celery
+great-expectations
+openlineage-airflow
+geopy
+astronomer-cosmos==1.11.0
+airflow-provider-great-expectations>=1.0.0
+dbt-core~=1.8.0
+dbt-trino~=1.8.0
+dbt-postgres~=1.8.0
+protobuf
+hvac==2.1.0
+requests>=2.32.3
+httpx
+pandas
+fuzzywuzzy
+python-Levenshtein
+tenacity
+# pydantic>=2.5.0 (Avoid conflict with Airflow/Cosmos pins)
+minio>=7.1.0
+prometheus-client>=0.19.0
+redis
+folium
 trino
-
-# Utils
-python-dotenv
-
-# Hanoi DAG dependencies
-pydantic-settings>=2.0,<3
-httpx>=0.27,<0.29
-minio>=7.2,<8

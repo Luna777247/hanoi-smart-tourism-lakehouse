@@ -1,1 +1,0 @@
-FROM docker.getcollate.io/openmetadata/server:1.11.3

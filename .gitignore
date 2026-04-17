@@ -1,13 +1,40 @@
+# Python & Environments
 __pycache__/
 *.pyc
+.venv/
+venv/
+env/
+.env
+
+# Notebooks & IDEs
 .ipynb_checkpoints/
 .jupyter_ystore.db
-pipelines/airflow/logs/
-*.log
 .vscode/
-.env
-spark-warehouse/
-tmp/
 *.code-workspace
-.DS_Store
 .idea/
+
+# Next.js & Frontend
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Airflow & Spark
+pipelines/airflow/logs/
+spark-warehouse/
+*.log
+tmp/
+import_errors.json
+
+# Data & Lakehouse Storage
+data/
+minio-data/
+postgres-data/
+vault-data/
+
+# OS Specific
+.DS_Store
+
+# Secrets
+docs/CREDENTIALS.md

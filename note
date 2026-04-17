@@ -1,0 +1,11 @@
+- tầng gold tổ chức theo chiều thời gian, thêm trường date 
+- tổ chức lại tầng gold 
+- load data vào bronze 1 lần hay nhiều lần 
+- về dashboard phải thiết kế để phục vụ cho nhiều bộ phận, mỗi bộ phận có 1 góc nhìn khác nhau nên phải thiết kế cho từng bộ phận
+=> cần tìm hiểu xem phục vụ cho những bộ phận nào => có những dashnoard nào? => có những metric nào cần tính toán?  => để thiết kết phù hợp 
+- Nhúng bộ dữ liệu vào , bảo nó tạo cho mình 5 cái dashboard phục vụ cho 1 đối tượng nào đó
+- Tất cả phải có tham chiếu, lý do sử dụng, và tính giải thích phù hợp
+- Quản lý dữ liệu nguồn chi tiết không để trùng lặp, lỗi??
+- Sơ dồ lineage phải thể hiện được trường nào từ đâu đến đâu ?
+- Tât cả các báo cáo phải có tham chiếu, lý do sử dụng, và tính giải thích phù hợp, tổ chức theo chiều thời gian 
+- Khi nào dùng view kho nào dùng bảng

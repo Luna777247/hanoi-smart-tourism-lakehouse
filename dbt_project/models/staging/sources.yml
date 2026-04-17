@@ -1,0 +1,27 @@
+# File: dbt_project/models/staging/sources.yml
+version: 2
+ 
+sources:
+  - name: silver
+    database: iceberg
+    schema: silver
+    tables:
+      - name: unified_attractions
+        description: 'Du lieu attractions hop nhat tu nhieu nguon'
+      - name: attractions
+        description: 'Du lieu attractions da lam sach tu single sources'
+        columns:
+          - name: attraction_id
+            tests: [unique, not_null]
+          - name: rating
+            tests:
+              - not_null
+              - accepted_range:
+                  min_value: 0
+                  max_value: 5
+          - name: lat
+            tests:
+              - accepted_range:
+                  min_value: 20.5
+                  max_value: 21.5
+

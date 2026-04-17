@@ -51,7 +51,7 @@ Khi DAG báo **Success**, dữ liệu thô sẽ nằm ở:
 1.  Vào [http://localhost:9001](http://localhost:9001).
 2.  Đăng nhập bằng: `minio` / `minio123` (Cấu hình trong `.env`).
 3.  Vào bucket **`tourism-bronze`**.
-4.  Bạn sẽ thấy cấu trúc: `landing/<nguon>/<nam>/<thang>/<ngay>/data_xyz.json`.
+4.  Bạn sẽ thấy cấu trúc: `source=<nguon>/date=<nam>-<thang>-<ngay>/data_xyz.json`.
 
 ---
 

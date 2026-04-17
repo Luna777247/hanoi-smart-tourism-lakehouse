@@ -22,9 +22,9 @@ class Settings(BaseSettings):
     AIRFLOW_PASSWORD: str = "admin"
 
     # MinIO
-    MINIO_ENDPOINT: str = "localhost:9000"
-    MINIO_ACCESS_KEY: str = "minioadmin"
-    MINIO_SECRET_KEY: str = "minioadmin123"
+    MINIO_ENDPOINT: str = "minio:9000"
+    MINIO_ACCESS_KEY: str = "minio_admin"
+    MINIO_SECRET_KEY: str = "ChangeMe_Minio123!"
     MINIO_SECURE: bool = False
 
     # Buckets

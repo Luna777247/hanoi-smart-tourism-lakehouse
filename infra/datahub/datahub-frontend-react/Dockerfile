@@ -1,1 +1,0 @@
-FROM acryldata/datahub-frontend-react:releases-v1.1.0

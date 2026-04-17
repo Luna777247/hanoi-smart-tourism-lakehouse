@@ -37,11 +37,11 @@ flowchart TD
     DB1 -->|Bắt thay đổi WAL/Binlog| Debezium
     Debezium -->|Tin nhắn thời gian thực| Kafka
 
-    %% Landing Zone
-    Landing[(MinIO S3 Landing Zone\nJSON Dữ liệu Gốc)]
-    class Landing storage;
+    %% Bronze Zone
+    Bronze[(MinIO S3 Bronze Zone\nJSON Dữ liệu Gốc)]
+    class Bronze storage;
 
-    Airflow -->|Lưu trực tiếp JSON| Landing
+    Airflow -->|Lưu trực tiếp JSON| Bronze
 
     %% Lakehouse Processing
     subgraph Medallion_Lakehouse [Medallion Lakehouse Architecture]
@@ -56,7 +56,7 @@ flowchart TD
         
         DBT[dbt\nData Build Tool]
         
-        Landing --> SparkBatch
+        Bronze --> SparkBatch
         Kafka --> SparkStream
         
         SparkBatch --> Bronze
@@ -101,6 +101,6 @@ flowchart TD
 
 1. **Nguồn dữ liệu (Data Sources):** Dữ liệu thu thập từ API công khai thiết lập bằng cơ chế **Pull** và dữ liệu nội bộ qua cơ chế **Push (CDC)**. 
 2. **Thu thập (Ingestion Layer):** Sử dụng chiến lược Hybrid: Batch (Airflow kéo API) và Streaming (Debezium + Kafka).
-3. **Lưu trữ & Xử lý (Medallion Lakehouse):** Minh họa rõ quá trình dữ liệu đi từ MinIO Landing Zone, biến đổi phẳng hoá qua PySpark vào bảng Iceberg Bronze, làm sạch ở Silver và tổng hợp bằng dbt tại layer Gold.
+3. **Lưu trữ & Xử lý (Medallion Lakehouse):** Minh họa rõ quá trình dữ liệu đi từ MinIO Bronze Zone, biến đổi phẳng hoá qua PySpark vào bảng Iceberg Bronze, làm sạch ở Silver và tổng hợp bằng dbt tại layer Gold.
 4. **Tiêu thụ (Consumption):** Lớp Gold được truy vấn bởi Trino với tốc độ cực nhanh, từ đó trực quan trên Apache Superset và hiển thị trên Portal do Next.js phát triển.
 5. **Quản trị & Chất lượng (Governance):** Song song với các layer xử lý, OpenMetadata tự động ghi nhận quá trình di chuyển của luồng dữ liệu (Lineage), còn Great Expectations thực thi bài kiểm tra về độ chuẩn xác của dữ liệu.
