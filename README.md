@@ -52,6 +52,7 @@ Trước khi bắt đầu quá trình cài đặt, đảm bảo máy chủ đáp
 
 > [!CAUTION]
 > **LƯU Ý BẢO MẬT**
+>
 > - Không mở cổng 5432 (PostgreSQL) và 9000 (MinIO S3 API) ra internet. Chỉ cho phép truy cập nội bộ hoặc qua VPN.
 > - Nên đặt Nginx Reverse Proxy + TLS/SSL trước tất cả các dịch vụ trong môi trường production.
 
@@ -62,6 +63,7 @@ Trước khi bắt đầu quá trình cài đặt, đảm bảo máy chủ đáp
 Thiết lập Airflow trong dự án này đã được tối ưu hóa vượt trội so với cấu hình chính thức của OpenMetadata:
 
 ### ✨ Tính Năng Nâng Cao
+
 - **CeleryExecutor**: Phân tán tác vụ thay vì LocalExecutor đơn luồng.
 - **Flower UI**: Giám sát Celery workers tại cổng 5555.
 - **Prometheus Metrics**: Export metrics cho giám sát tại cổng 8000.
@@ -69,20 +71,23 @@ Thiết lập Airflow trong dự án này đã được tối ưu hóa vượt t
 - **Health Checks**: Kiểm tra sức khỏe chi tiết cho tất cả components.
 
 ### 🔍 Giám Sát & Metrics
+
 - **Flower**: `http://localhost:5555` - Giám sát Celery workers.
 - **Prometheus Metrics**: `http://localhost:8000/metrics` - Metrics cho monitoring.
 - **Airflow Web UI**: `http://localhost:8080` - DAG management.
 
 ### 📊 Components
-- `airflow-webserver`: Web UI và API.
+
+- `airflow-api-server`: Web UI và API (Thay thế cho webserver truyền thống).
 - `airflow-scheduler`: Lên lịch và trigger DAG.
-- `airflow-worker`: Thực thi tác vụ (Celery workers).
+- `airflow-dag-processor`: Xử lý định nghĩa DAG tách biệt để tối ưu hiệu năng.
 - `airflow-triggerer`: Xử lý deferred tasks.
-- `airflow-flower`: Giám sát Celery.
+- `airflow-flower`: Giám sát Celery (nếu dùng) hoặc stats (tùy chọn).
 - `airflow-metrics`: Export Prometheus metrics.
 - `airflow-logrotate`: Quản lý xoay vòng logs.
 
 ### 🏗️ Kiến Trúc
+
 ```mermaid
 graph TD
     A[Airflow Web UI 8080] --> B[(PostgreSQL Metadata)]
@@ -97,6 +102,7 @@ graph TD
 ## 3. Cài Đặt Môi Trường
 
 ### 3.1 Clone Repository
+
 Tải mã nguồn dự án về máy chủ:
 
 ```bash
@@ -108,7 +114,7 @@ cd hanoi-tourism-lakehouse
 ls -la
 ```
 
-**Cấu Trúc Thư Mục Dự Án (Thực Tế)**
+### Cấu Trúc Thư Mục Dự Án (Thực Tế)
 
 ```text
 hanoi-tourism-lakehouse/
@@ -121,12 +127,16 @@ hanoi-tourism-lakehouse/
 │
 ├── dataplatform-extensions/           # Extensions cho nền tảng dữ liệu
 │
-├── docs/                              # Tài liệu dự án
-│   ├── report.md
-│   ├── Hướng dẫn triển khai.md
-│   ├── architecture.md
-│   ├── system_architecture.md
-│   └── troubleshooting.md
+├── docs/                              # Tài liệu dự án tiêu chuẩn
+│   ├── 01_PROJECT_OVERVIEW.md         # Tổng quan và Chiến lược
+│   ├── 02_ARCHITECTURE_DESIGN.md      # Kiến trúc Medallion & Stack
+│   ├── 03_DATA_DICTIONARY.md          # Từ điển Dữ liệu & Lineage
+│   ├── 04_DASHBOARD_SPECIFICATION.md  # Đặc tả KPIs & Superset
+│   ├── 05_API_SPECIFICATION.md        # Đặc tả Endpoints
+│   ├── 06_OPERATIONS_GUIDE.md         # Hướng dẫn Vận hành & Setup
+│   ├── 07_SECURITY_CREDENTIALS.md     # Bảo mật, Cổng & Vault
+│   ├── 08_DATA_LINEAGE_PROCESSING.md  # Luồng Dữ liệu & Xử lý Chi tiết
+│   └── 09_PROJECT_COMPLETION_SNAPSHOT.md # Báo cáo Dữ liệu Thực tế
 │
 ├── flink-rocksdb/                     # Cấu hình Flink + RocksDB state backend
 │
@@ -160,11 +170,13 @@ hanoi-tourism-lakehouse/
 
 > [!NOTE]
 > **GHI CHÚ VỀ CẤU TRÚC**
+>
 > - Toàn bộ cấu hình hạ tầng nằm trong thư mục `infra/` được tổ chức riêng theo từng service.
 > - Ứng dụng portal (Backend + Frontend) được đặt trong `apps/` tách biệt khỏi hạ tầng.
 > - Script quản lý hạ tầng có 2 phiên bản: `manage_infra.sh` (Linux) và `manage_infra.ps1` (Windows).
 
 ### 3.2 Cấu Hình Biến Môi Trường
+
 Sao chép file template và điền các giá trị thực tế:
 
 ```bash
@@ -202,6 +214,7 @@ VAULT_DEV_ROOT_TOKEN_ID=<vault_root_token>
 
 > [!TIP]
 > **THỰC HÀNH TỐT NHẤT**
+>
 > - Không bao giờ commit file `.env` vào Git. File `.gitignore` đã cấu hình bỏ qua `.env` theo mặc định.
 > - Trong production, sử dụng HashiCorp Vault (Mục 6) để quản lý tập trung toàn bộ secrets.
 
@@ -209,7 +222,7 @@ VAULT_DEV_ROOT_TOKEN_ID=<vault_root_token>
 
 Thực hiện các bước theo đúng thứ tự sau đây:
 
-**Bước 1 — Khởi động hạ tầng cốt lõi**
+### Bước 1 — Khởi động hạ tầng cốt lõi
 
 ```bash
 # Khoi dong PostgreSQL, MinIO, Vault truoc tien
@@ -219,7 +232,7 @@ docker compose up -d postgres minio vault
 docker compose ps
 ```
 
-**Bước 2 — Khởi tạo MinIO Buckets**
+### Bước 2 — Khởi tạo MinIO Buckets
 
 ```bash
 # Chay script khoi tao bucket tu dong
@@ -234,7 +247,7 @@ docker compose exec minio mc mb local/tourism-silver
 docker compose exec minio mc mb local/tourism-gold
 ```
 
-**Bước 3 — Khởi tạo HashiCorp Vault**
+### Bước 3 — Khởi tạo HashiCorp Vault
 
 ```bash
 # Init Vault va lay Unseal Keys
@@ -251,30 +264,38 @@ docker compose exec vault vault kv put secret/tourism/apis \
   tripadvisor_key='<YOUR_KEY>'
 ```
 
-**Bước 4 — Khởi động Apache Airflow**
+### Bước 4 — Khởi động Apache Airflow
 
 ## 🚀 Đóng gói & Triển khai Production
 
 Dự án hiện đã được cấu hình để đóng gói hoàn chỉnh (Baking) thay vì phụ thuộc vào ổ đĩa ngoài (Volumes).
 
 ### 1. Đóng gói dự án
+
 Sử dụng Makefile để xây dựng toàn bộ các Image đã được tối ưu hóa:
+
 ```bash
 make build
 ```
+
 Lệnh này sẽ:
+
 - Nhúng DAGs và dbt project trực tiếp vào Airflow Image.
 - Build Backend ở chế độ Production (4 workers, no reload).
 - Build Frontend ở chế độ Standalone.
 
 ### 2. Khởi tạo môi trường
+
 Nếu chạy lần đầu hoặc trên môi trường mới:
+
 ```bash
 make init
 ```
+
 Lệnh này sẽ tự động khởi tạo MinIO Buckets, Database Migration và Vault.
 
 ### 3. Vận hành
+
 - Chạy hệ thống: `make up`
 - Dừng hệ thống: `make down`
 - Xem log: `make logs s=airflow-worker`
@@ -285,20 +306,21 @@ Lệnh này sẽ tự động khởi tạo MinIO Buckets, Database Migration và
 docker compose run --rm airflow-init
 
 # Khoi dong tat ca Airflow components
-docker compose up -d airflow-webserver airflow-scheduler \
-  airflow-worker airflow-triggerer airflow-flower \
+docker compose up -d airflow-api-server airflow-scheduler \
+  airflow-dag-processor airflow-triggerer airflow-flower \
   airflow-metrics airflow-logrotate
 
 # Kiem tra logs
-docker compose logs -f airflow-webserver
+docker compose logs -f airflow-api-server
 ```
 
 *Truy cập các giao diện:*
+
 - Airflow Web UI: `http://localhost:8080`
 - Flower (Celery monitoring): `http://localhost:5555`
 - Prometheus Metrics: `http://localhost:8001/metrics`
 
-**Bước 5 — Khởi động Query Engine và Analytics**
+### Bước 5 — Khởi động Query Engine và Analytics
 
 ```bash
 # Khoi dong Trino va Superset
@@ -310,7 +332,7 @@ docker compose exec superset superset init
 docker compose up -d openmetadata-server
 ```
 
-**Bước 6 — Khởi động Management Portal**
+### Bước 6 — Khởi động Management Portal
 
 ```bash
 # Khoi dong Backend FastAPI
@@ -373,11 +395,12 @@ WITH (
 ```
 
 ### 4.3 Cấu Hình Compaction Job
+
 Compaction Job chạy tự động hàng đêm, nén các file nhỏ, tăng 40% tốc độ truy vấn Trino:
 
 ```bash
 # Kich hoat thu cong Compaction DAG
-docker compose exec airflow-webserver airflow dags trigger \
+docker compose exec airflow-api-server airflow dags trigger \
   iceberg_maintenance_dag
 ```
 
@@ -389,6 +412,7 @@ docker compose exec airflow-webserver airflow dags trigger \
 ## 5. Cấu Hình Data Pipeline
 
 ### 5.1 Đăng Ký Nguồn Dữ Liệu
+
 Truy cập Management Portal tại `http://<server-ip>:3000`:
 
 1. Vào menu **Ingestion** → **Add Source**.
@@ -451,6 +475,7 @@ vault kv put secret/storage/minio \
 ## 7. Cấu Hình Analytics Dashboard
 
 ### 7.1 Kết Nối Superset với Trino
+
 Truy cập Apache Superset tại `http://<server-ip>:8400` (admin/admin mặc định — đổi ngay sau khi đăng nhập):
 
 1. Vào **Settings** → **Database Connections** → **+ Database**.
@@ -469,6 +494,7 @@ docker compose exec superset superset import-dashboards \
 ```
 
 **Các dashboards được import:**
+
 1. Tổng quan mật độ điểm du lịch Hà Nội (Bản đồ).
 2. Phân tích xu hướng rating theo quận/huyện.
 3. Cảnh báo nguy cơ quá tải (Overcrowding Alert).
@@ -479,6 +505,7 @@ docker compose exec superset superset import-dashboards \
 ## 8. Cấu Hình OpenMetadata
 
 ### 8.1 Kết Nối Data Sources
+
 Truy cập OpenMetadata tại `http://<server-ip>:8585` (`admin@open-metadata.org` / `admin`):
 
 1. **Settings** → **Services** → **+ Add Service**.
@@ -497,6 +524,29 @@ spark.openlineage.transport.url=http://openmetadata-server:8080
 spark.openlineage.transport.endpoint=/api/v1/lineage
 spark.openlineage.namespace=hanoi-tourism-lakehouse
 ```
+
+ Hướng dẫn truy cập Data Lineage trên OpenMetadata
+Bước 1: Đăng nhập hệ thống
+Địa chỉ: <http://localhost:8585>
+Tài khoản đăng nhập (Mặc định):
+Email: <admin@open-metadata.org>
+Mật khẩu: admin
+Bước 2: Tìm kiếm dữ liệu "Vàng"
+Sau khi đăng nhập, tại thanh tìm kiếm ở chính giữa trang đầu tiên:
+
+Gõ từ khóa: gold_attractions.
+Chọn bảng dữ liệu thuộc dịch vụ trino_lakehouse (hoặc iceberg).
+Bước 3: Truy cập tab Lineage
+Tại trang chi tiết của bảng gold_attractions, bạn sẽ thấy các tab thông tin (Schema, Queries, Profiler, Lineage...).
+
+Hãy nhấp chuột vào tab Lineage.
+Lúc này, một sơ đồ dạng nút (Node) sẽ hiện ra.
+Bước 4: Khám phá dòng chảy dữ liệu
+Trong sơ đồ Lineage, bạn sẽ thấy các kết nối trực quan:
+
+Nút bên trái (Bronze): source=osm_google_enriched (Dữ liệu thô từ API).
+Nút ở giữa (Silver): attractions_enriched (Dữ liệu đã qua Spark xử lý làm sạch).
+Nút bên phải (Gold): gold_attractions (Bảng bảng cuối cùng chia theo 30 Quận/Huyện).
 
 ---
 
@@ -518,6 +568,7 @@ spark.openlineage.namespace=hanoi-tourism-lakehouse
 | 10 | Data Lineage xuất hiện trong OpenMetadata | OpenMetadata → Lineage Graph |
 
 **Health check nhanh:**
+
 ```bash
 docker compose ps
 docker stats --no-stream
@@ -548,8 +599,8 @@ docker compose exec minio mc mirror \
 ### 10.2 Scaling Services
 
 ```bash
-# Scale Airflow Workers khi co workload lon
-docker compose up -d --scale airflow-worker=3
+# Tang tai nguyen cho Scheduler khi co nhieu DAGs
+docker compose up -d --scale airflow-scheduler=1
 
 # Scale Trino Workers de tang throughput truy van
 docker compose up -d --scale trino-worker=2
@@ -577,7 +628,7 @@ docker compose up -d --scale trino-worker=2
 
 | Dịch vụ | Username | Password | Ghi chú |
 | :--- | :--- | :--- | :--- |
-| Airflow Webserver | `admin` | Xem `.env` | Đổi ngay sau khi vào |
+| Airflow API Server | `admin` | Xem `.env` | Đổi ngay sau khi vào |
 | MinIO Console | `minio_admin` | Xem `.env` | S3-compatible storage |
 | Apache Superset | `admin` | `admin` | ⚠️ Bắt buộc đổi ngay |
 | OpenMetadata | `admin@open-metadata.org` | `admin` | ⚠️ Bắt buộc đổi ngay |
@@ -598,6 +649,7 @@ docker compose up -d --scale trino-worker=2
 ## 📞 HỖ TRỢ KỸ THUẬT
 
 Để được hỗ trợ kỹ thuật, vui lòng liên hệ team Data Engineering qua:
+
 - Tạo **Issue** trên GitHub repository của dự án.
 - Liên hệ trực tiếp qua kênh Slack: **#hanoi-tourism-lakehouse**
 - Email: [data-team@hanoi-tourism.gov.vn](mailto:data-team@hanoi-tourism.gov.vn)

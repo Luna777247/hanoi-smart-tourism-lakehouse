@@ -15,4 +15,3 @@ models:
       +schema: silver
     marts:
       +materialized: table
-      +schema: gold

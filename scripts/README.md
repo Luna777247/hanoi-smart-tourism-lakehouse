@@ -11,18 +11,21 @@ Hệ thống hiện chỉ còn **một luồng ingestion chính**:
 ## 📂 Scripts Available
 
 ### Core Scripts
+
 - `start_docker_services.sh` - Khởi động tất cả services cần thiết
 - `stop_docker_services.sh` - Dừng services (giữ data)
 - `backup_minio.sh` - Backup dữ liệu MinIO
 - `monitor_dags.sh` - Monitor trạng thái DAGs
 
 ### Automation Scripts
+
 - `run_weekly_maintenance.ps1` - Chạy full maintenance workflow
 - `setup_windows_scheduler.ps1` - Setup Windows Task Scheduler
 
 ## 🚀 Quick Start
 
 ### 1. Chạy Manual
+
 ```bash
 # Windows PowerShell
 cd d:\hn-smart-tourism-lakehouse
@@ -33,6 +36,7 @@ cd d:\hn-smart-tourism-lakehouse
 ```
 
 ### 2. Setup Automation (Windows)
+
 ```powershell
 # Chạy với quyền Administrator
 .\scripts\setup_windows_scheduler.ps1
@@ -41,17 +45,22 @@ cd d:\hn-smart-tourism-lakehouse
 ## 📊 Monitoring & Alerts
 
 ### Airflow UI Monitoring
-- URL: http://localhost:8080
+
+- URL: <http://localhost:8080>
 - Check DAG runs status
 - View logs khi fail
 
 ### Email Alerts Setup
+
 1. Cập nhật `.env` với thông tin SMTP:
-   ```
+
+   ```bash
    SMTP_USER=your-email@gmail.com
    SMTP_PASSWORD=your-app-password
    ```
+
 2. Thêm email vào DAG default_args:
+
    ```python
    default_args = {
        'email_on_failure': True,
@@ -61,6 +70,7 @@ cd d:\hn-smart-tourism-lakehouse
    ```
 
 ### Backup Monitoring
+
 - Backups lưu trong `./backups/`
 - Tự động cleanup, giữ 5 backup gần nhất
 - Check size và status trong logs
@@ -68,7 +78,7 @@ cd d:\hn-smart-tourism-lakehouse
 ## 📈 Maintenance Schedule
 
 | Task | Frequency | Script |
-|------|-----------|--------|
+| :--- | :--- | :--- |
 | Start Services | Khi cần | `start_docker_services.sh` |
 | Trigger DAGs | Manual | Airflow UI |
 | Backup Data | Weekly | `backup_minio.sh` |
@@ -77,24 +87,27 @@ cd d:\hn-smart-tourism-lakehouse
 ## 🔧 Troubleshooting
 
 ### Services không start
+
 ```bash
 # Check Docker status
 docker ps
 
 # View logs
-docker logs lakehouse-airflow-webserver
+docker logs lakehouse-airflow-api
 ```
 
 ### DAGs fail
+
 ```bash
 # Check Airflow logs
-docker exec lakehouse-airflow-worker airflow dags list
+docker exec lakehouse-airflow-scheduler airflow dags list
 
 # Manual trigger
-docker exec lakehouse-airflow-worker airflow dags trigger bronze_ingest_osm_google_enriched
+docker exec lakehouse-airflow-scheduler airflow dags trigger bronze_ingest_osm_google_enriched
 ```
 
 ### Backup fail
+
 ```bash
 # Check disk space
 df -h

@@ -1,5 +1,5 @@
 # File: infra/airflow/Dockerfile
-FROM apache/airflow:3.0.0
+FROM apache/airflow:2.10.2-python3.12
 
 USER root
 # Install git, uv, and Java (required for Spark)

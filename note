@@ -1,5 +1,4 @@
-- tầng gold tổ chức theo chiều thời gian, thêm trường date 
-- tổ chức lại tầng gold 
+- tổ chức lại tầng gold theo chiều thời gian, thêm trường date 
 - load data vào bronze 1 lần hay nhiều lần 
 - về dashboard phải thiết kế để phục vụ cho nhiều bộ phận, mỗi bộ phận có 1 góc nhìn khác nhau nên phải thiết kế cho từng bộ phận
 => cần tìm hiểu xem phục vụ cho những bộ phận nào => có những dashnoard nào? => có những metric nào cần tính toán?  => để thiết kết phù hợp 

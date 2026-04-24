@@ -1,10 +1,12 @@
- chạy build lại:
+# Giới Thiệu Hệ Thống Hanoi Smart Tourism Lakehouse
+
+chạy build lại:
 
 powershell
 ./manage.ps1 build
 Sau lần build này, nếu dòng chữ Warning: dbt parse failed biến mất, nghĩa là hệ thống của bạn đã được đóng gói hoàn hảo và có thể sẵn sàng cho việc triển khai thực tế. Sau khi build xong, bạn có thể thực hiện ./manage.ps1 init để bắt đầu khởi tạo dữ liệu.
 
-### Các bước tiếp theo để khởi chạy hệ thống
+## Các bước tiếp theo để khởi chạy hệ thống
 
 Bây giờ bạn đã có một "bản đóng gói" hoàn chỉnh, hãy thực hiện các lệnh sau theo thứ tự để bắt đầu chạy dự án:
 
@@ -30,7 +32,7 @@ Bây giờ bạn đã có một "bản đóng gói" hoàn chỉnh, hãy thực h
 
 Hệ thống **Hanoi Smart Tourism Lakehouse** của bạn được thiết kế theo kiến trúc **Medallion (Bronze-Silver-Gold)** với quản trị tập trung. Dựa trên `docker-compose.yml` và các phân tích kỹ thuật, hệ thống có chính xác **5 Luồng (Streams/Layers)** chính hoạt động tuần tự và song song:
 
-### 1. Luồng Hạ tầng & Lưu trữ (Foundation Stream)
+## Phân tích cấu trúc 5 Luồng (Streams/Layers) chính
 
 * **Thành phần:** `Postgres`, `Redis`, `MinIO`, `Vault`, `Keycloak`.
 * **Chức năng:** Đây là nền móng. `Postgres` lưu metadata, `MinIO` đóng vai trò là "hồ dữ liệu" (Data Lake), `Vault` bảo mật các Token API.
@@ -38,9 +40,9 @@ Hệ thống **Hanoi Smart Tourism Lakehouse** của bạn được thiết kế
 
 ### 2. Luồng Ingestion & Điều phối (Orchestration Stream)
 
-* **Thành phần:** `Airflow 3.0 (Scheduler, Worker, Webserver)`.
-* **Chức năng:** Có nhiệm vụ "kéo" dữ liệu từ các nguồn (Web Scraping, TripAdvisor API, Google Places) về lưu vào tầng **Bronze** (dạng thô) trên MinIO.
-* **Mối liên hệ:** Luồng này gọi các Worker để thực thi task.
+* **Thành phần:** `Airflow 2.10.2 (Scheduler, Webserver, Triggerer, Processor)`.
+* **Chức năng:** Có nhiệm vụ "kéo" dữ liệu từ các nguồn (Web Scraping, HubSpot, Google Places) về lưu vào tầng **Bronze** (dạng thô) trên MinIO.
+* **Mối liên hệ:** Luồng này xử lý điều phối (Orchestration) cho toàn bộ hệ thống.
 
 ### 3. Luồng Xử lý & ETL (ETL/Processing Stream)
 
@@ -61,7 +63,7 @@ Hệ thống **Hanoi Smart Tourism Lakehouse** của bạn được thiết kế
 
 ---
 
-### Tóm tắt luồng khởi động tối ưu nhất (Cho máy tính cá nhân)
+## Tóm tắt luồng khởi động tối ưu nhất (Cho máy tính cá nhân)
 
 Nếu bạn muốn hệ thống ổn định nhất, hãy khởi động theo thứ tự lệnh mà tôi vừa cập nhật trong `manage.ps1`:
 
@@ -97,7 +99,7 @@ Tôi đã cập nhật file `manage.ps1` để chia tách hoàn toàn thành **5
     ./manage.ps1 up-foundation
     ```
 
-2. **Chạy Luồng 2 (Orchestration):** Khởi tạo bộ máy lập lịch Airflow 3.0.
+2. **Chạy Luồng 2 (Orchestration):** Khởi tạo bộ máy lập lịch Airflow 2.10.2 (Pinned Stable).
 
     ```powershell
     ./manage.ps1 up-orchestration
@@ -109,7 +111,7 @@ Tôi đã cập nhật file `manage.ps1` để chia tách hoàn toàn thành **5
     ./manage.ps1 up-etl
     ```
 
-4. **Chạy Luồng 4 (Governance):** Khởi tạo Elasticsearch và OpenMetadata.
+4. **Chạy Luồng 4 (Governance):** Khởi tạo Elasticsearch 7.17.13 và OpenMetadata 1.12.0.
 
     ```powershell
     ./manage.ps1 up-governance

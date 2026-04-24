@@ -132,6 +132,10 @@ class OSMGoogleEnrichor(BaseLakehouseIngestor):
         
         # Calculate start index based on day of year
         # This ensures we process a different subset each day
+        if total_candidates == 0:
+            logger.warning("No candidates found for enrichment. Skipping batch calculation.")
+            return []
+            
         start_idx = (day_of_year * batch_size) % total_candidates
         end_idx = min(start_idx + batch_size, total_candidates)
         

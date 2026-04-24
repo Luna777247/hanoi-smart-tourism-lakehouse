@@ -1,5 +1,5 @@
 # File: infra/airflow/requirements.txt
-# apache-airflow>=3.0.0 (Already in base image)
+apache-airflow==2.10.2
 apache-airflow-providers-postgres
 apache-airflow-providers-apache-spark~=5.0.0
 apache-airflow-providers-trino
@@ -28,3 +28,5 @@ prometheus-client>=0.19.0
 redis
 folium
 trino
+asyncpg
+psycopg2-binary

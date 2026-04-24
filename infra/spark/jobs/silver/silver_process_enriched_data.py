@@ -34,20 +34,24 @@ def main():
         silver_df = raw_df.select(
             F.col("osm_data.osm_id").alias("osm_id"),
             F.coalesce(F.col("google_data.name"), F.col("osm_data.name")).alias("name"),
-            (F.col("google_data.formatted_address") if "formatted_address" in fields else F.lit(None)).alias("address"),
+            F.coalesce(F.col("google_data.formatted_address"), F.col("osm_data.tags.addr:full")).alias("address"),
             F.coalesce(
-                F.col("google_data.geometry.location.lat") if "geometry" in fields else F.lit(None), 
+                F.col("google_data.geometry.location.lat"), 
                 F.col("osm_data.lat")
             ).cast(DoubleType()).alias("latitude"),
             F.coalesce(
-                F.col("google_data.geometry.location.lng") if "geometry" in fields else F.lit(None), 
+                F.col("google_data.geometry.location.lng"), 
                 F.col("osm_data.lon")
             ).cast(DoubleType()).alias("longitude"),
-            (F.col("google_data.rating").cast(DoubleType()) if "rating" in fields else F.lit(None).cast(DoubleType())).alias("rating"),
-            (F.col("google_data.user_ratings_total") if "user_ratings_total" in fields else F.lit(None).cast("int")).alias("review_count"),
+            F.col("google_data.rating").cast(DoubleType()).alias("rating"),
+            F.col("google_data.user_ratings_total").alias("review_count"),
             (F.col("google_data.website") if "website" in fields else F.lit(None).cast("string")).alias("website"),
             (F.col("google_data.international_phone_number") if "international_phone_number" in fields else F.lit(None).cast("string")).alias("phone"),
-            (F.col("google_data.types") if "types" in fields else F.lit(None).cast("array<string>")).alias("poi_types"),
+            # Kết hợp nhãn từ Google và OSM để đầy đủ category
+            F.array_union(
+                F.coalesce(F.col("google_data.types"), F.array()),
+                F.array(F.col("osm_data.tags.tourism"), F.col("osm_data.tags.amenity"), F.col("osm_data.tags.historic"))
+            ).alias("poi_types"),
             (F.col("run_id") if "run_id" in raw_df.columns else F.lit("manual")).alias("run_id"),
             (F.col("snapshot_date") if "snapshot_date" in raw_df.columns else F.lit("1970-01-01")).alias("snapshot_date"),
             F.current_timestamp().alias("source_ingested_at"),

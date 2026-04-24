@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: gold_attractions
+    description: "Main mart for all analyzed attractions in Hanoi"
+    columns:
+      - name: attraction_key
+        tests:
+          - unique
+          - not_null
+      - name: rating
+        tests:
+          - accepted_values:
+              values: [0, 1, 2, 3, 4, 5]
+              quote: false
+              # Trino handles numbers specifically, but dbt generic tests often check set inclusion
+
+  - name: gold_executive_overview
+    description: "High-level metrics for management"
+    columns:
+      - name: total_attractions
+        tests:
+          - not_null
+
+  - name: gold_district_benchmarking
+    description: "Comparison of metrics across Hanoi districts"
+    columns:
+      - name: district_name
+        tests:
+          - not_null
+      - name: avg_rating
+        tests:
+          - not_null
+
+  - name: gold_quality_alerts
+    description: "Identification of data quality issues and low-rated spots"
+    columns:
+      - name: alert_type
+        tests:
+          - accepted_values:
+              values: ['Low Rating', 'Low Reliability', 'Missing Contact Info']
+
+  - name: gold_service_accessibility
+    description: "Accessibility metrics and contact availability"
+    columns:
+      - name: district_name
+        tests:
+          - not_null

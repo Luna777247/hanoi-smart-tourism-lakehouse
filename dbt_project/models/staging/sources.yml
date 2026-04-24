@@ -8,6 +8,8 @@ sources:
     tables:
       - name: unified_attractions
         description: 'Du lieu attractions hop nhat tu nhieu nguon'
+      - name: attractions_enriched
+        description: 'Du lieu attractions da duoc enrich tu Google'
       - name: attractions
         description: 'Du lieu attractions da lam sach tu single sources'
         columns:

@@ -42,8 +42,13 @@ class OSMCollector(BaseLakehouseIngestor):
           way["amenity"="place_of_worship"](area.searchArea);
           node["amenity"="museum"](area.searchArea);
           node["amenity"="arts_centre"](area.searchArea);
+          node["amenity"="restaurant"](area.searchArea); -- Culinary Tourism
           node["leisure"="park"](area.searchArea);
           way["leisure"="park"](area.searchArea);
+          node["leisure"="nature_reserve"](area.searchArea); -- Eco-tourism (Ba Vi, Soc Son)
+          node["leisure"="theme_park"](area.searchArea);
+          node["shop"="craft"](area.searchArea); -- Craft Villages
+          node["craft"](area.searchArea); 
         );
         out center;
         """

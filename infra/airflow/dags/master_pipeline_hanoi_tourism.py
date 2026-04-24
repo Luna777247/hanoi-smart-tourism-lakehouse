@@ -2,7 +2,10 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
-from airflow.operators.python import PythonOperator
+try:
+    from airflow.providers.standard.operators.python import PythonOperator
+except ImportError:
+    from airflow.operators.python import PythonOperator
 import os
 import pandas as pd
 import folium
@@ -53,6 +56,7 @@ def generate_heatmap_logic():
 with DAG(
     'master_pipeline_hanoi_tourism',
     default_args=default_args,
+    start_date=datetime(2025, 1, 1),
     description='Master orchestration for the main OSM -> Google enrichment pipeline',
     schedule=None,
     catchup=False,

@@ -45,16 +45,22 @@ WITH (
 echo '==> Tao Gold tables'
 run_sql "
 CREATE TABLE IF NOT EXISTS iceberg.gold.mart_district_stats (
+    report_date         DATE,
     district            VARCHAR,
     total_attractions   BIGINT,
     avg_rating          DOUBLE,
     total_reviews       BIGINT,
-    featured_attraction VARCHAR
+    max_reviews         INTEGER
 )
-WITH (format = 'PARQUET', location = 's3a://tourism-gold/mart_district_stats/')"
+WITH (
+    format       = 'PARQUET', 
+    partitioning = ARRAY['report_date'],
+    location     = 's3a://tourism-gold/mart_district_stats/'
+)"
 
 run_sql "
 CREATE TABLE IF NOT EXISTS iceberg.gold.mart_tourism_heatmap (
+    report_date      DATE,
     name             VARCHAR,
     latitude         DOUBLE,
     longitude        DOUBLE,
@@ -63,6 +69,10 @@ CREATE TABLE IF NOT EXISTS iceberg.gold.mart_tourism_heatmap (
     district         VARCHAR,
     popularity_score DOUBLE
 )
-WITH (format = 'PARQUET', location = 's3a://tourism-gold/mart_tourism_heatmap/')"
+WITH (
+    format       = 'PARQUET', 
+    partitioning = ARRAY['report_date'],
+    location     = 's3a://tourism-gold/mart_tourism_heatmap/'
+)"
  
 echo '==> Iceberg tables created successfully!'
